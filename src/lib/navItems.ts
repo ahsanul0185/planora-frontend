@@ -43,7 +43,7 @@ export const organizerNavItems: NavSection[] = [
         title: "Event Management",
         items: [
             {
-                title: "My Events",
+                title: "Organized Events",
                 href: "/organizer/dashboard/my-events",
                 icon: "CalendarRange"
             },
@@ -52,12 +52,7 @@ export const organizerNavItems: NavSection[] = [
                 href: "/organizer/dashboard/create-event",
                 icon: "PlusCircle",
             },
-        ]
-    },
-    {
-        title: "Attendees & Invites",
-        items: [
-            {
+             {
                 title: "Participant Requests",
                 href: "/organizer/dashboard/participant-requests",
                 icon: "Users",

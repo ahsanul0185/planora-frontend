@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PH Healthcare Management System",
-  description: "A comprehensive healthcare management system built with Next.js, TypeScript, and Tailwind CSS. This application provides features for managing patient records, appointments, billing, and more, ensuring efficient healthcare administration.",
+  title: "Planora - Smart Event Management",
+  description: "Planora is a comprehensive event management platform designed to help organizers and participants connect, book, and manage events with ease.",
 };
 
 export default function RootLayout({
