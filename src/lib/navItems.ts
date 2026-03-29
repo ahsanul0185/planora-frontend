@@ -75,11 +75,6 @@ export const adminNavItems: NavSection[] = [
                 href: "/admin/dashboard/admins-management",
                 icon: "Shield",
             },
-            {
-                title: "Organizers",
-                href: "/admin/dashboard/organizers-management",
-                icon: "UserCheck",
-            },
         ],
     },
     {

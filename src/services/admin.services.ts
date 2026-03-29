@@ -9,7 +9,7 @@ export const changeUserStatus = async (
 ): Promise<ApiResponse<IUser>> => {
   try {
     const res = await httpClient.patch<IUser>(
-      "/admin/change-user-status",
+      "/admins/change-user-status",
       payload
     );
     return res as ApiResponse<IUser>;

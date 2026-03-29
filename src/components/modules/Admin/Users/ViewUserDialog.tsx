@@ -53,7 +53,7 @@ const ViewUserDialog = ({ open, onOpenChange, userId }: ViewUserDialogProps) => 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl p-4">
         <DialogHeader>
           <DialogTitle>User Details</DialogTitle>
           <DialogDescription>
@@ -182,12 +182,6 @@ const ViewUserDialog = ({ open, onOpenChange, userId }: ViewUserDialogProps) => 
             </div>
           )}
         </ScrollArea>
-
-        <div className="flex justify-end pt-4 border-t border-border">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Close
-          </Button>
-        </div>
       </DialogContent>
     </Dialog>
   );
