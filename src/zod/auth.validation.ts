@@ -20,6 +20,16 @@ export const verifyEmailZodSchema = z.object({
   otp: z.string().min(6, "OTP must be exactly 6 characters").max(6, "OTP must be exactly 6 characters"),
 });
 
+export const changePasswordZodSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters long"),
+  confirmPassword: z.string().min(1, "Please confirm your new password"),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
 export type ILoginPayload = z.infer<typeof loginZodSchema>;
 export type IRegisterPayload = z.infer<typeof registerZodSchema>;
 export type IVerifyEmailPayload = z.infer<typeof verifyEmailZodSchema>;
+export type IChangePasswordPayload = z.infer<typeof changePasswordZodSchema>;

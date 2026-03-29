@@ -3,6 +3,7 @@ export interface ILoginResponse {
     accessToken : string;
     refreshToken : string;
     user : {
+        id: string;
         needPasswordChange : boolean;
         email : string;
         name : string;
@@ -12,4 +13,9 @@ export interface ILoginResponse {
         isDeleted : boolean;
         emailVerified : boolean;
     }
+}
+
+export interface IChangePasswordResponse extends ILoginResponse {
+    success: boolean;
+    message: string;
 }

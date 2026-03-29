@@ -21,6 +21,8 @@ import { AvatarEditable } from "./AvatarEditable";
 import { useState } from "react";
 import { Loader2, Save } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import AppField from "@/components/shared/form/AppField";
+import { cn } from "@/lib/utils";
 
 interface ProfileFormProps {
   user: IUser;
@@ -139,22 +141,11 @@ export function ProfileForm({ user }: ProfileFormProps) {
               }}
             >
               {(field) => (
-                <div className="space-y-1.5 flex flex-col">
-                  <Label htmlFor={field.name}>Full Name *</Label>
-                  <Input
-                    id={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="Enter your full name"
-                    className="h-10"
-                  />
-                  {field.state.meta.errors.length > 0 && (
-                    <p className="text-sm text-destructive font-medium">
-                      {field.state.meta.errors.join(", ")}
-                    </p>
-                  )}
-                </div>
+                <AppField
+                  field={field}
+                  label="Full Name *"
+                  placeholder="Enter your full name"
+                />
               )}
             </form.Field>
 
@@ -176,12 +167,14 @@ export function ProfileForm({ user }: ProfileFormProps) {
             >
               {(field) => (
                 <div className="space-y-1.5 flex flex-col">
-                  <Label htmlFor={field.name}>Gender</Label>
+                  <Label htmlFor={field.name} className={cn(field.state.meta.errors.length > 0 && "text-destructive")}>
+                    Gender
+                  </Label>
                   <Select
                     value={field.state.value || "MALE"}
                     onValueChange={(val) => field.handleChange(val as any)}
                   >
-                    <SelectTrigger className="w-full h-10">
+                    <SelectTrigger className={cn("w-full h-10", field.state.meta.errors.length > 0 && "border-destructive focus:ring-destructive/20")}>
                       <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
                     <SelectContent>
@@ -190,6 +183,11 @@ export function ProfileForm({ user }: ProfileFormProps) {
                       <SelectItem value="OTHER">Other</SelectItem>
                     </SelectContent>
                   </Select>
+                  {field.state.meta.errors.length > 0 && (
+                    <p className="text-sm text-destructive">
+                      {field.state.meta.errors[0]?.message || String(field.state.meta.errors[0])}
+                    </p>
+                  )}
                 </div>
               )}
             </form.Field>
@@ -201,16 +199,11 @@ export function ProfileForm({ user }: ProfileFormProps) {
               }}
             >
               {(field) => (
-                <div className="space-y-1.5 flex flex-col">
-                  <Label htmlFor={field.name}>Birth Date</Label>
-                  <Input
-                    id={field.name}
-                    type="date"
-                    value={field.state.value || ""}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    className="h-10"
-                  />
-                </div>
+                <AppField
+                  field={field}
+                  label="Birth Date"
+                  type="date"
+                />
               )}
             </form.Field>
           </div>
@@ -232,16 +225,11 @@ export function ProfileForm({ user }: ProfileFormProps) {
               }}
             >
               {(field) => (
-                <div className="space-y-1.5 flex flex-col">
-                  <Label htmlFor={field.name}>Phone Number</Label>
-                  <Input
-                    id={field.name}
-                    value={field.state.value || ""}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="e.g., +1 234 567 890"
-                    className="h-10"
-                  />
-                </div>
+                <AppField
+                  field={field}
+                  label="Phone Number"
+                  placeholder="e.g., +1 234 567 890"
+                />
               )}
             </form.Field>
 
@@ -252,16 +240,11 @@ export function ProfileForm({ user }: ProfileFormProps) {
               }}
             >
               {(field) => (
-                <div className="space-y-1.5 flex flex-col">
-                  <Label htmlFor={field.name}>Address</Label>
-                  <Input
-                    id={field.name}
-                    value={field.state.value || ""}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="City, Country"
-                    className="h-10"
-                  />
-                </div>
+                <AppField
+                  field={field}
+                  label="Address"
+                  placeholder="City, Country"
+                />
               )}
             </form.Field>
           </div>
@@ -285,7 +268,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
                 <div className="flex justify-between items-center mt-1">
                   {field.state.meta.errors.length > 0 ? (
                     <p className="text-xs text-destructive font-medium">
-                      {field.state.meta.errors.join(", ")}
+                      {field.state.meta.errors[0]?.message || String(field.state.meta.errors[0])}
                     </p>
                   ) : <span />}
                   <span className="text-[10px] text-muted-foreground uppercase tracking-tighter">

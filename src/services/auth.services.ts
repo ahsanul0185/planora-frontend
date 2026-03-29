@@ -5,8 +5,8 @@ import { getDefaultDashboardRoute, isValidRedirectForRole, UserRole } from "@/li
 import { httpClient } from "@/lib/axios/httpClient";
 import { setTokenInCookies } from "@/lib/tokenUtils";
 import { ApiErrorResponse } from "@/types/api.types";
-import { ILoginResponse } from "@/types/auth.types";
-import { ILoginPayload, IRegisterPayload, IVerifyEmailPayload, loginZodSchema, registerZodSchema, verifyEmailZodSchema } from "@/zod/auth.validation";
+import { ILoginResponse, IChangePasswordResponse } from "@/types/auth.types";
+import { loginZodSchema, registerZodSchema, verifyEmailZodSchema, changePasswordZodSchema, ILoginPayload, IRegisterPayload, IVerifyEmailPayload, IChangePasswordPayload } from "@/zod/auth.validation";
 import { deleteCookie } from "@/lib/cookieUtils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -198,6 +198,48 @@ export async function getUserInfo() {
     } catch (error) {
         console.error("Error fetching user info:", error);
         return null;
+    }
+}
+
+export async function changePassword(payload: IChangePasswordPayload): Promise<IChangePasswordResponse | ApiErrorResponse> {
+    const parsedPayload = changePasswordZodSchema.safeParse(payload);
+
+    if (!parsedPayload.success) {
+        return {
+            success: false,
+            message: parsedPayload.error.issues[0].message || "Invalid input",
+        }
+    }
+
+    try {
+        const response = await httpClient.post<ILoginResponse>("/auth/change-password", {
+            currentPassword: parsedPayload.data.currentPassword,
+            newPassword: parsedPayload.data.newPassword,
+        });
+
+        const { accessToken, refreshToken, token } = response.data;
+
+        if (accessToken) {
+            await setTokenInCookies("accessToken", accessToken);
+        }
+        if (refreshToken) {
+            await setTokenInCookies("refreshToken", refreshToken);
+        }
+        if (token) {
+            await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60);
+        }
+
+        return {
+            success: true,
+            message: "Password changed successfully",
+            ...response.data,
+        }
+        
+    } catch (error: any) {
+        return {
+            success: false,
+            message: error?.response?.data?.message || `Failed to change password: ${error.message}`,
+        }
     }
 }
 
