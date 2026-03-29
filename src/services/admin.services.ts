@@ -2,6 +2,7 @@
 
 import { httpClient } from "@/lib/axios/httpClient";
 import { ApiResponse } from "@/types/api.types";
+import { IAdmin, IAdminsResponse, ICreateAdminPayload } from "@/types/admin.types";
 import { IChangeUserStatusPayload, IUser, IUserQueryParams, IUsersResponse } from "@/types/user.types";
 
 export const changeUserStatus = async (
@@ -48,6 +49,38 @@ export const getUserById = async (id: string): Promise<ApiResponse<IUser>> => {
   } catch (error: any) {
     const errorData = error?.response?.data;
     const message = errorData?.message || "Failed to fetch user details";
+    throw new Error(message);
+  }
+};
+
+export const getAllAdmins = async (): Promise<IAdminsResponse> => {
+  const res = await httpClient.get<IAdmin[]>("/admins");
+  return {
+    data: res.data ?? [],
+    meta: res.meta ?? { page: 1, limit: 10, total: 0, totalPages: 1 },
+  };
+};
+
+export const createAdmin = async (
+  payload: ICreateAdminPayload
+): Promise<ApiResponse<IAdmin>> => {
+  try {
+    const res = await httpClient.post<IAdmin>("/users/create-admin", payload);
+    return res as ApiResponse<IAdmin>;
+  } catch (error: any) {
+    const errorData = error?.response?.data;
+    const message = errorData?.message || "Failed to create admin";
+    throw new Error(message);
+  }
+};
+
+export const deleteAdmin = async (id: string): Promise<ApiResponse<null>> => {
+  try {
+    const res = await httpClient.delete<null>(`/admins/${id}`);
+    return res as ApiResponse<null>;
+  } catch (error: any) {
+    const errorData = error?.response?.data;
+    const message = errorData?.message || "Failed to delete admin";
     throw new Error(message);
   }
 };
