@@ -45,3 +45,19 @@ export const exportParticipantsCSV = async (eventId: string) => {
   const res = await httpClient.get<any>(`/participations/${eventId}/export`);
   return res;
 };
+
+export const cancelParticipation = async (eventId: string) => {
+  const res = await httpClient.delete(`/participations/${eventId}/leave`);
+  return res;
+};
+
+export const initiatePaymentForApprovedParticipation = async (
+  eventId: string
+): Promise<{ paymentUrl: string }> => {
+  const res = await httpClient.post<{ paymentUrl: string }>(
+    `/participations/${eventId}/pay`,
+    {}
+  );
+  return res.data;
+};
+

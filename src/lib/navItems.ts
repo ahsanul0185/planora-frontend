@@ -124,6 +124,11 @@ export const participantNavItems: NavSection[] = [
                 icon: "Ticket",
             },
             {
+                title: "My Participations",
+                href: "/dashboard/my-participations",
+                icon: "ClipboardList",
+            },
+            {
                 title: "Pending Invitations",
                 href: "/dashboard/pending-invitations",
                 icon: "Mail",

@@ -19,6 +19,11 @@ interface DataTableActions<TData> {
     onView ?: (data : TData) => void;
     onEdit ?: (data : TData) => void;
     onDelete ?: (data : TData) => void;
+    labels?: {
+       view?: string;
+       edit?: string;
+       delete?: string;
+    };
 }
 
 interface DataTableProps<TData> {
@@ -88,7 +93,7 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
                                 actions.onView && (
                                     <DropdownMenuItem onClick={() => actions.onView?.(rowData)}>
                                         <Eye className="mr-2 h-4 w-4" />
-                                        View Details
+                                        {actions.labels?.view || "View Details"}
                                     </DropdownMenuItem>
                                 )
                             }
@@ -97,7 +102,7 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
                                 actions.onEdit && (
                                     <DropdownMenuItem onClick={() => actions.onEdit?.(rowData)}>
                                         <Pencil className="mr-2 h-4 w-4" />
-                                        Edit Event
+                                        {actions.labels?.edit || "Edit Event"}
                                     </DropdownMenuItem>
                                 )
                             }
@@ -109,7 +114,7 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
                                         className="text-destructive focus:bg-destructive focus:text-destructive-foreground font-medium"
                                     >
                                         <Trash2 className="mr-2 h-4 w-4" />
-                                        Delete Event
+                                        {actions.labels?.delete || "Delete Event"}
                                     </DropdownMenuItem>
                                 )
                             }

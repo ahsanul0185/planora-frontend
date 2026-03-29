@@ -3,6 +3,7 @@
 import { httpClient } from "@/lib/axios/httpClient";
 import { ApiResponse } from "@/types/api.types";
 import { IUser } from "@/types/user.types";
+import { IMyJoinedEventsQueryParams, IMyJoinedEventsResponse } from "@/types/participant.types";
 
 export const updateMyProfile = async (
   formData: FormData
@@ -30,3 +31,24 @@ export const updateMyProfile = async (
     throw new Error(message);
   }
 };
+
+export const getMyJoinedEvents = async (
+  params: IMyJoinedEventsQueryParams = {}
+): Promise<IMyJoinedEventsResponse> => {
+  const queryParams: Record<string, unknown> = {};
+  if (params.searchTerm) queryParams.searchTerm = params.searchTerm;
+  if (params.page) queryParams.page = params.page;
+  if (params.limit) queryParams.limit = params.limit;
+  if (params.sortBy) queryParams.sortBy = params.sortBy;
+  if (params.sortOrder) queryParams.sortOrder = params.sortOrder;
+
+  const res = await httpClient.get("/users/me/joined-events", {
+    params: queryParams,
+  });
+
+  return {
+    data: res.data,
+    meta: res.meta ?? { page: 1, limit: 10, total: 0, totalPages: 1 },
+  };
+};
+
