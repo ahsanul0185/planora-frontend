@@ -22,6 +22,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ImagePlus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import { eventValidationSchema } from "@/zod/event.validation";
 
 interface EditEventModalProps {
   open: boolean;
@@ -273,8 +274,7 @@ const EditEventModal = ({
               <form.Field
                 name="title"
                 validators={{
-                  onChange: ({ value }) =>
-                    !value ? "Title is required" : undefined,
+                  onChange: eventValidationSchema.shape.title as any
                 }}
                 children={(field) => (
                   <AppField
@@ -306,8 +306,7 @@ const EditEventModal = ({
                 <form.Field
                   name="categoryId"
                   validators={{
-                    onChange: ({ value }) =>
-                      !value ? "Category is required" : undefined,
+                    onChange: eventValidationSchema.shape.categoryId as any
                   }}
                   children={(field) => (
                     <ShadcnSelectField
@@ -396,8 +395,7 @@ const EditEventModal = ({
                 <form.Field
                   name="startDate"
                   validators={{
-                    onChange: ({ value }) =>
-                      !value ? "Start date is required" : undefined,
+                    onChange: eventValidationSchema.shape.startDate as any
                   }}
                   children={(field) => (
                     <DatePicker
@@ -416,8 +414,7 @@ const EditEventModal = ({
                 <form.Field
                   name="endDate"
                   validators={{
-                    onChange: ({ value }) =>
-                      !value ? "End date is required" : undefined,
+                    onChange: eventValidationSchema.shape.endDate as any
                   }}
                   children={(field) => (
                     <DatePicker
@@ -457,10 +454,7 @@ const EditEventModal = ({
                 <form.Field
                   name="registrationFee"
                   validators={{
-                    onChange: ({ value }) =>
-                      Number(value) < 0
-                        ? "Fee cannot be negative"
-                        : undefined,
+                    onChange: eventValidationSchema.shape.registrationFee as any
                   }}
                   children={(field) => (
                     <AppField

@@ -55,7 +55,7 @@ export const organizerNavItems: NavSection[] = [
             {
                 title: "Invitations",
                 href: "/organizer/dashboard/invitations",
-                icon: "Send",
+                icon: "MailOpen",
             },
             {
                 title: "Reviews",

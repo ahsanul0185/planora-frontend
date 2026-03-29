@@ -1,6 +1,8 @@
+import ParticipantManager from "@/components/modules/Organizer/Participants/ParticipantManager";
+
 const ParticipantRequestsPage = () => {
   return (
-    <div>ParticipantRequestsPage</div>
+    <ParticipantManager />
   )
 }
 
