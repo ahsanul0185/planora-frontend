@@ -2,7 +2,7 @@
 
 import { httpClient } from "@/lib/axios/httpClient";
 import { ApiResponse } from "@/types/api.types";
-import { IOrganizerDashboardData, IParticipantDashboardData } from "@/types/dashboard.types";
+import { IOrganizerDashboardData, IParticipantDashboardData, IAdminDashboardData } from "@/types/dashboard.types";
 
 export const getOrganizerDashboardData = async (): Promise<ApiResponse<IOrganizerDashboardData>> => {
   try {
@@ -11,6 +11,17 @@ export const getOrganizerDashboardData = async (): Promise<ApiResponse<IOrganize
   } catch (error: any) {
     const errorData = error?.response?.data;
     const message = errorData?.message || "Failed to fetch dashboard data";
+    throw new Error(message);
+  }
+};
+
+export const getAdminDashboardData = async (): Promise<ApiResponse<IAdminDashboardData>> => {
+  try {
+    const res = await httpClient.get<IAdminDashboardData>("/dashboard/admin");
+    return res as ApiResponse<IAdminDashboardData>;
+  } catch (error: any) {
+    const errorData = error?.response?.data;
+    const message = errorData?.message || "Failed to fetch admin dashboard data";
     throw new Error(message);
   }
 };

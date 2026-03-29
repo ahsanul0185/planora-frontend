@@ -132,3 +132,58 @@ export interface IParticipantDashboardData {
     charts: IParticipantCharts;
     lists: IParticipantLists;
 }
+
+// Admin Dashboard Types
+
+export interface IAdminStatCards {
+    totalUsers: number;
+    newUsersThisWeek: number;
+    totalEvents: number;
+    activeEvents: number;
+    totalRevenue: number;
+    pendingReports: number;
+}
+
+export interface INewUsersOverTime {
+    date: string;
+    count: number;
+}
+
+export interface IEventVisibilitySplit {
+    visibility: string;
+    count: number;
+}
+
+export interface IRevenueByPaymentStatus {
+    status: string;
+    total: number;
+}
+
+export interface IRevenueOverTime {
+    month: string;
+    amount: number;
+}
+
+export interface IAdminCharts {
+    newUsersOverTime: INewUsersOverTime[];
+    eventsByCategory: IEventsJoinedByCategory[];
+    eventVisibilitySplit: IEventVisibilitySplit[];
+    revenueByPaymentStatus: IRevenueByPaymentStatus[];
+    revenueOverTime: IRevenueOverTime[];
+}
+
+export interface IAdminActivityFeed {
+    id: string; // fallback shape
+    title: string;
+    timestamp: string;
+}
+
+export interface IAdminLists {
+    recentActivityFeed: IAdminActivityFeed[];
+}
+
+export interface IAdminDashboardData {
+    statCards: IAdminStatCards;
+    charts: IAdminCharts;
+    lists: IAdminLists;
+}
