@@ -9,25 +9,64 @@ export interface NavSection {
     items : NavItem[]
 }
 
-export interface PieChartData {
-    status: string,
-    count: number
+// Organizer Dashboard Types
+
+export interface IOrganizerStatCards {
+    totalEvents: number;
+    activeEvents: number;
+    totalParticipants: number;
+    revenueEarned: number;
+    pendingRequests: number;
+    avgRating: number;
 }
 
-export interface BarChartData {
-    month: Date | string,
-    count: number
+export interface IParticipantPerEvent {
+    event: string;
+    count: number;
 }
 
-export interface IAdminDashboardData {
-    appointmentCount : number;
-    patientCount : number;
-    doctorCount : number;
-    adminCount : number;
-    superAdminCount : number;
-    paymentCount : number;
-    userCount : number;
-    totalRevenue : number;
-    barChartData : BarChartData[];
-    pieChartData : PieChartData[];
+export interface IParticipationStatusBreakdown {
+    status: string;
+    count: number;
+}
+
+export interface IJoinRequestsOverTime {
+    date: string;
+    count: number;
+}
+
+export interface IRevenuePerEvent {
+    event: string;
+    revenue: number;
+}
+
+export interface IAverageRatingPerEvent {
+    event: string;
+    averageRating: number;
+}
+
+export interface IOrganizerCharts {
+    participantsPerEvent: IParticipantPerEvent[];
+    participationStatusBreakdown: IParticipationStatusBreakdown[];
+    joinRequestsOverTime: IJoinRequestsOverTime[];
+    revenuePerEvent: IRevenuePerEvent[];
+    averageRatingPerEvent: IAverageRatingPerEvent[];
+}
+
+export interface IOrganizerUpcomingEvent {
+    id: string;
+    title: string;
+    startDate: string;
+    status: string;
+    fillRate: number;
+    confirmedCount: number;
+    maxParticipants: number | null;
+}
+
+export interface IOrganizerDashboardData {
+    statCards: IOrganizerStatCards;
+    charts: IOrganizerCharts;
+    lists: {
+        upcomingEvents: IOrganizerUpcomingEvent[];
+    };
 }

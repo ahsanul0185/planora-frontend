@@ -6,6 +6,7 @@ import { getIconComponent } from "@/lib/iconMapper"
 import { cn } from "@/lib/utils"
 import { NavSection } from "@/types/dashboard.types"
 import { UserInfo } from "@/types/user.types"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import UserDropdown from "./UserDropdown"
@@ -27,10 +28,14 @@ const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : Dashboard
       {/* Logo / Brand */}
       <div className="flex h-20 items-center px-6">
         <Link href={dashboardHome} className="flex items-center gap-2">
-          <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center">
-             <div className="size-4 rounded-full bg-primary animate-pulse" />
-          </div>
-          <span className="text-xl font-bold tracking-tight text-foreground">Planora</span>
+          <Image 
+            src="/planora-logo.png" 
+            alt="Planora Logo" 
+            width={150} 
+            height={40} 
+            className="w-auto h-5 object-contain" 
+            priority 
+          />
         </Link>
       </div>
 

@@ -8,11 +8,6 @@ export const getCommonNavItems = (role: UserRole): NavSection[] => {
             // title : "Dashboard",
             items: [
                 {
-                    title: "Home",
-                    href: "/",
-                    icon: "Home"
-                },
-                {
                     title: "Dashboard",
                     href: defaultDashboard,
                     icon: "LayoutDashboard"
