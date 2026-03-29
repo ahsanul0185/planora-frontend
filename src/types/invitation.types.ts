@@ -28,9 +28,14 @@ export interface IInvitation {
 
 export interface IInvitationQueryParams {
   searchTerm?: string;
-  page?: number;
-  limit?: number;
+  page?: number | string;
+  limit?: number | string;
   sortBy?: string;
   sortOrder?: "asc" | "desc";
   status?: string;
+}
+
+export interface IMyInvitationsResponse {
+  data: IInvitation[];
+  meta: import("./api.types").PaginationMeta;
 }

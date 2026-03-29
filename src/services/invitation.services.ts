@@ -40,7 +40,7 @@ export const revokeInvitation = async (invId: string): Promise<ApiResponse<IInvi
 };
 
 export const getMyInvitations = async (params?: IInvitationQueryParams): Promise<ApiResponse<IInvitation[]>> => {
-  const res = await httpClient.get<IInvitation[]>(`/invitations`, {
+  const res = await httpClient.get<IInvitation[]>(`/users/me/invitations`, {
     params: params as Record<string, unknown>,
   });
   return {

@@ -70,3 +70,65 @@ export interface IOrganizerDashboardData {
         upcomingEvents: IOrganizerUpcomingEvent[];
     };
 }
+
+// Participant Dashboard Types
+
+export interface IParticipantStatCards {
+    eventsJoined: number;
+    upcomingEvents: number;
+    totalSpent: number;
+    reviewsWritten: number;
+    avgRatingGiven: number;
+}
+
+export interface IEventsJoinedByCategory {
+    category: string;
+    count: number;
+}
+
+export interface IEventActivityOverTime {
+    month: string;
+    count: number;
+}
+
+export interface IParticipantCharts {
+    participationStatusBreakdown: IParticipationStatusBreakdown[];
+    eventsJoinedByCategory: IEventsJoinedByCategory[];
+    eventActivityOverTime: IEventActivityOverTime[];
+}
+
+export interface IParticipantUpcomingEvent {
+    id: string;
+    event: string;
+    date: string;
+    fee: number;
+    currency: string;
+}
+
+export interface IParticipantPaymentHistory {
+    id: string;
+    event: string;
+    amount: number;
+    currency: string;
+    status: string;
+}
+
+export interface IParticipantPendingInvitation {
+    id: string;
+    event: string;
+    host: string;
+    fee: number;
+    currency: string;
+}
+
+export interface IParticipantLists {
+    upcomingConfirmedEvents: IParticipantUpcomingEvent[];
+    paymentHistory: IParticipantPaymentHistory[];
+    pendingInvitations: IParticipantPendingInvitation[];
+}
+
+export interface IParticipantDashboardData {
+    statCards: IParticipantStatCards;
+    charts: IParticipantCharts;
+    lists: IParticipantLists;
+}

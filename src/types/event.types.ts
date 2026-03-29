@@ -42,6 +42,7 @@ export interface IEvent {
   createdAt: string;
   updatedAt: string;
   maxParticipants: number | null;
+  currency?: string;
 
   // Relations
   organizer?: UserInfo;
