@@ -41,6 +41,7 @@ export interface IEvent {
   categoryId: string;
   createdAt: string;
   updatedAt: string;
+  maxParticipants: number | null;
 
   // Relations
   organizer?: UserInfo;
@@ -51,6 +52,19 @@ export interface IEvent {
   _count?: {
     participations: number;
     reviews: number;
+  };
+}
+
+export interface IDetailedEvent extends Omit<IEvent, 'organizer'> {
+  currency: string;
+  averageRating: number;
+  reviews: any[];
+  deletedAt: string | null;
+  organizer: {
+    id: string;
+    name: string;
+    email: string;
+    image: string | null;
   };
 }
 

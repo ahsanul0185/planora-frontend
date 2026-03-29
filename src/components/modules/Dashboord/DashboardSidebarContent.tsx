@@ -23,11 +23,14 @@ interface DashboardSidebarContentProps {
 const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : DashboardSidebarContentProps) => {
     const pathname = usePathname()
   return (
-    <div className="hidden md:flex h-full w-64 flex-col border-r bg-card overflow-y-auto">
+    <div className="hidden md:flex h-full w-60 flex-col border-r border-border/40 bg-background overflow-y-auto">
       {/* Logo / Brand */}
-      <div className="flex h-16 items-center border-b px-6">
-        <Link href={dashboardHome}>
-          <span className="text-xl font-bold text-primary">Planora</span>
+      <div className="flex h-20 items-center px-6">
+        <Link href={dashboardHome} className="flex items-center gap-2">
+          <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center">
+             <div className="size-4 rounded-full bg-primary animate-pulse" />
+          </div>
+          <span className="text-xl font-bold tracking-tight text-foreground">Planora</span>
         </Link>
       </div>
 
@@ -53,13 +56,16 @@ const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : Dashboard
                       href={item.href}
                       key={id}
                       className={cn(
-                        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
+                        "group relative flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-semibold transition-all duration-200",
                         isActive
-                          ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                          ? "bg-primary/10 text-primary shadow-sm"
+                          : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
                       )}
                     >
-                      <Icon className="w-4 h-4" />
+                      {isActive && (
+                        <div className="absolute left-0 h-5 w-1 rounded-r-full bg-primary" />
+                      )}
+                      <Icon className={cn("w-4.5 h-4.5 transition-colors", isActive ? "text-primary" : "group-hover:text-foreground")} />
                       <span>{item.title}</span>
                     </Link>
                   );

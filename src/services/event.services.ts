@@ -1,7 +1,7 @@
 "use server";
 
 import { httpClient } from "@/lib/axios/httpClient";
-import { IEvent, IEventResponse } from "@/types/event.types";
+import { IDetailedEvent, IEvent, IEventResponse } from "@/types/event.types";
 
 export interface IMyEventsQueryParams {
   searchTerm?: string;
@@ -35,6 +35,11 @@ export const getMyOrganizedEvents = async (
     data: res.data,
     meta: res.meta ?? { page: 1, limit: 10, total: 0, totalPages: 1 },
   };
+};
+
+export const getEventById = async (id: string): Promise<IDetailedEvent> => {
+  const res = await httpClient.get<IDetailedEvent>(`/events/${id}`);
+  return res.data;
 };
 
 export const deleteEvent = async (id: string) => {

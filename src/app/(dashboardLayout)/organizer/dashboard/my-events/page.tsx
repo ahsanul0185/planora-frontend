@@ -1,4 +1,5 @@
-import MyEventsTable from "@/components/modules/MyEvents/MyEventsTable";
+
+import MyEventsTable from "@/components/modules/Organizer/OrganizedEvents/MyEventsTable";
 import { getMyOrganizedEvents, IMyEventsQueryParams } from "@/services/event.services";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { Calendar } from "lucide-react";
@@ -35,17 +36,16 @@ const MyEventsPage = async ({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="space-y-6">
-        {/* Page Header */}
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-            <Calendar className="h-5 w-5 text-primary" />
+        <div className="flex flex-col gap-1 py-4">
+          <div className="flex items-center gap-3">
+            <div className="flex size-10 items-center justify-center">
+              <Calendar className="h-7 w-7 text-primary" />
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground leading-none">My Events</h1>
           </div>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">My Events</h1>
-            <p className="text-sm text-muted-foreground">
+          {/* <p className="text-muted-foreground text-sm font-medium pl-13">
               Manage and track all your organized events
-            </p>
-          </div>
+          </p> */}
         </div>
 
         {/* Table */}

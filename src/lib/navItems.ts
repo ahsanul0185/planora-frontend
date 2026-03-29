@@ -48,19 +48,19 @@ export const organizerNavItems: NavSection[] = [
                 icon: "CalendarRange"
             },
             {
-                title: "Create Event",
-                href: "/organizer/dashboard/create-event",
-                icon: "PlusCircle",
-            },
-             {
-                title: "Participant Requests",
-                href: "/organizer/dashboard/participant-requests",
+                title: "Participants",
+                href: "/organizer/dashboard/participants",
                 icon: "Users",
             },
             {
-                title: "Send Invitations",
-                href: "/organizer/dashboard/send-invitations",
+                title: "Invitations",
+                href: "/organizer/dashboard/invitations",
                 icon: "Send",
+            },
+            {
+                title: "Reviews",
+                href: "/organizer/dashboard/reviews",
+                icon: "Star",
             },
         ]
     }

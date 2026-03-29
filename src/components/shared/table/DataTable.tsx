@@ -5,7 +5,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PaginationMeta } from "@/types/api.types";
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, PaginationState, SortingState, useReactTable } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import DataTableFilters, {
   DataTableFilterConfig,
@@ -87,7 +87,8 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
                             {
                                 actions.onView && (
                                     <DropdownMenuItem onClick={() => actions.onView?.(rowData)}>
-                                        View
+                                        <Eye className="mr-2 h-4 w-4" />
+                                        View Details
                                     </DropdownMenuItem>
                                 )
                             }
@@ -95,15 +96,20 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
                             {
                                 actions.onEdit && (
                                     <DropdownMenuItem onClick={() => actions.onEdit?.(rowData)}>
-                                        Edit
+                                        <Pencil className="mr-2 h-4 w-4" />
+                                        Edit Event
                                     </DropdownMenuItem>
                                 )
                             }
 
                             {
                                 actions.onDelete && (
-                                    <DropdownMenuItem onClick={() => actions.onDelete?.(rowData)}>
-                                        Delete
+                                    <DropdownMenuItem 
+                                        onClick={() => actions.onDelete?.(rowData)}
+                                        className="text-destructive focus:bg-destructive focus:text-destructive-foreground font-medium"
+                                    >
+                                        <Trash2 className="mr-2 h-4 w-4" />
+                                        Delete Event
                                     </DropdownMenuItem>
                                 )
                             }

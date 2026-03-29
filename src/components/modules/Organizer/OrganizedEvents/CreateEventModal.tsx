@@ -15,19 +15,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { DatePicker } from "@/components/shared/form/DatePicker";
-import { updateEvent } from "@/services/event.services";
-import { IEvent, IEventCategory } from "@/types/event.types";
+import { createEvent } from "@/services/event.services";
+import { IEventCategory } from "@/types/event.types";
 import { useForm } from "@tanstack/react-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { ImagePlus, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 
-interface EditEventModalProps {
+interface CreateEventModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   categories: IEventCategory[];
-  event: IEvent | null;
 }
 
 const ShadcnSelectField = ({
@@ -63,17 +62,11 @@ const ShadcnSelectField = ({
   </div>
 );
 
-const toDateInputValue = (iso?: string | null) => {
-  if (!iso) return "";
-  return new Date(iso).toISOString().split("T")[0];
-};
-
-const EditEventModal = ({
+const CreateEventModal = ({
   open,
   onOpenChange,
   categories,
-  event,
-}: EditEventModalProps) => {
+}: CreateEventModalProps) => {
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -111,9 +104,9 @@ const EditEventModal = ({
       venueName: "",
       venueAddress: "",
       tags: "",
+      currency: "USD",
     },
     onSubmit: async ({ value }) => {
-      if (!event) return;
       try {
         const formData = new FormData();
 
@@ -148,45 +141,21 @@ const EditEventModal = ({
         if (value.tags) {
           formData.append("tags", value.tags.split(",").map((t) => t.trim()).filter(Boolean).join(","));
         }
+        formData.append("currency", value.currency || "USD");
 
-        await updateEvent(event.id, formData);
-        toast.success("Event updated successfully!");
+        await createEvent(formData);
+        toast.success("Event created successfully!");
         queryClient.invalidateQueries({ queryKey: ["my-organized-events"] });
         onOpenChange(false);
+        form.reset();
+        resetFileState();
+        setIsOnline(false);
       } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "Failed to update event";
+        const msg = err instanceof Error ? err.message : "Failed to create event";
         toast.error(msg);
       }
     },
   });
-
-  useEffect(() => {
-    if (open && event) {
-      setIsOnline(event.isOnline);
-      setPreviewUrl(event.bannerImage || null);
-      setBannerFile(null);
-
-      form.setFieldValue("title", event.title);
-      form.setFieldValue("description", event.description || "");
-      form.setFieldValue("startDate", toDateInputValue(event.startDate));
-      form.setFieldValue("endDate", toDateInputValue(event.endDate));
-      form.setFieldValue("registrationDeadline", toDateInputValue(event.registrationDeadline));
-      form.setFieldValue("registrationFee", event.registrationFee);
-      form.setFieldValue("categoryId", event.categoryId);
-      form.setFieldValue("visibility", event.visibility);
-      form.setFieldValue("status", event.status);
-      form.setFieldValue("timezone", "UTC");
-      form.setFieldValue("onlineLink", event.onlineLink || "");
-      form.setFieldValue("venueName", event.venueName || "");
-      form.setFieldValue("venueAddress", event.venueAddress || "");
-      form.setFieldValue(
-        "tags",
-        event.tags?.map((t) => t.name).join(", ") || ""
-      );
-      const maxParts = (event as unknown as Record<string, unknown>).maxParticipants;
-      form.setFieldValue("maxParticipants", maxParts ? String(maxParts) : "");
-    }
-  }, [open, event, form]);
 
   return (
     <Dialog
@@ -196,14 +165,15 @@ const EditEventModal = ({
         if (!val) {
           form.reset();
           resetFileState();
+          setIsOnline(false);
         }
       }}
     >
-      <DialogContent className="max-w-5xl w-full max-h-[90vh] flex flex-col p-0 overflow-hidden">
+      <DialogContent className="max-w-5xl w-full max-h-[90vh] flex flex-col p-0 overflow-hidden rounded-lg">
         <DialogHeader className="px-8 pt-8 pb-4 border-b">
-          <DialogTitle className="text-2xl font-bold">Edit Event</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">Create New Event</DialogTitle>
           <DialogDescription className="text-base">
-            Update your event information below.
+            Fill in the details below to launch your next great event.
           </DialogDescription>
         </DialogHeader>
 
@@ -246,7 +216,7 @@ const EditEventModal = ({
                 ) : (
                   <div className="flex flex-col items-center justify-center gap-2 py-10 text-muted-foreground">
                     <ImagePlus className="h-8 w-8" />
-                    <p className="text-sm font-medium">Click to change banner image</p>
+                    <p className="text-sm font-medium">Click to upload banner image</p>
                     <p className="text-xs">PNG, JPG, WEBP up to 5MB</p>
                   </div>
                 )}
@@ -352,8 +322,6 @@ const EditEventModal = ({
                       options={[
                         { label: "Published", value: "PUBLISHED" },
                         { label: "Draft", value: "DRAFT" },
-                        { label: "Cancelled", value: "CANCELLED" },
-                        { label: "Ended", value: "ENDED" },
                       ]}
                     />
                   )}
@@ -463,23 +431,39 @@ const EditEventModal = ({
                     <AppField
                       field={field}
                       type="number"
-                      label="Registration Fee ($)"
+                      label="Registration Fee"
                       placeholder="0 for free"
                     />
                   )}
                 />
                 <form.Field
-                  name="maxParticipants"
+                  name="currency"
                   children={(field) => (
-                    <AppField
-                      field={field}
-                      type="number"
-                      label="Max Participants (optional)"
-                      placeholder="Leave blank for unlimited"
+                    <ShadcnSelectField
+                      label="Currency"
+                      value={field.state.value}
+                      onChange={field.handleChange}
+                      options={[
+                        { label: "USD", value: "USD" },
+                        { label: "BDT", value: "BDT" },
+                        { label: "EUR", value: "EUR" },
+                        { label: "GBP", value: "GBP" },
+                      ]}
                     />
                   )}
                 />
               </div>
+              <form.Field
+                name="maxParticipants"
+                children={(field) => (
+                  <AppField
+                    field={field}
+                    type="number"
+                    label="Max Participants (optional)"
+                    placeholder="Leave blank for unlimited"
+                  />
+                )}
+              />
             </div>
 
             <Separator />
@@ -491,11 +475,11 @@ const EditEventModal = ({
               </h4>
               <div className="flex items-center gap-3">
                 <Switch
-                  id="edit-isOnline"
+                  id="isOnline"
                   checked={isOnline}
                   onCheckedChange={setIsOnline}
                 />
-                <Label htmlFor="edit-isOnline" className="cursor-pointer">
+                <Label htmlFor="isOnline" className="cursor-pointer">
                   Online Event
                 </Label>
               </div>
@@ -540,14 +524,14 @@ const EditEventModal = ({
               <form.Subscribe
                 selector={(state) => [state.canSubmit, state.isSubmitting]}
                 children={([canSubmit, isSubmitting]) => (
-                  <div className="pt-4 pb-2">
+                  <div className="pt-4 pb-2 flex justify-end w-full">
                     <AppSubmitButton
-                      className="w-full h-11"
+                      className="w-fit"
                       isPending={Boolean(isSubmitting)}
                       disabled={!canSubmit}
-                      pendingLabel="Saving changes..."
+                      pendingLabel="Creating your event..."
                     >
-                      Save Changes
+                      Create Event
                     </AppSubmitButton>
                   </div>
                 )}
@@ -560,4 +544,4 @@ const EditEventModal = ({
   );
 };
 
-export default EditEventModal;
+export default CreateEventModal;

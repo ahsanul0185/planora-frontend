@@ -7,6 +7,7 @@ import { setTokenInCookies } from "@/lib/tokenUtils";
 import { ApiErrorResponse } from "@/types/api.types";
 import { ILoginResponse } from "@/types/auth.types";
 import { ILoginPayload, IRegisterPayload, IVerifyEmailPayload, loginZodSchema, registerZodSchema, verifyEmailZodSchema } from "@/zod/auth.validation";
+import { deleteCookie } from "@/lib/cookieUtils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -197,5 +198,18 @@ export async function getUserInfo() {
     } catch (error) {
         console.error("Error fetching user info:", error);
         return null;
+    }
+}
+
+export async function logoutUser() {
+    try {
+        await httpClient.post("/auth/logout", {});
+    } catch (error) {
+        console.error("Logout failed on backend:", error);
+    } finally {
+        await deleteCookie("accessToken");
+        await deleteCookie("refreshToken");
+        await deleteCookie("better-auth.session_token");
+        redirect("/login");
     }
 }

@@ -1,5 +1,6 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { UserInfo } from "@/types/user.types"
+import { logoutUser } from "@/services/auth.services"
 import { ChevronUp, Key, LogOut, User } from "lucide-react"
 import Link from "next/link"
 
@@ -60,8 +61,7 @@ const UserDropdown = ({ userInfo }: UserDropdownProps) => {
             </DropdownMenuItem>
 
             <DropdownMenuSeparator/>
-
-            <DropdownMenuItem onClick={() => {}} className="cursor-pointer text-red-600">
+            <DropdownMenuItem onClick={() => logoutUser()} className="cursor-pointer text-red-600">
                 <LogOut className="mr-2 h-4 w-4"/>
                 Logout
             </DropdownMenuItem>

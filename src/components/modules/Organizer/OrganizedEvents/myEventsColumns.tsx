@@ -59,7 +59,7 @@ export const myEventsColumns: ColumnDef<IEvent>[] = [
     cell: ({ row }) => {
       const isPublic = row.original.visibility === "PUBLIC";
       return (
-        <Badge variant={isPublic ? "outline" : "secondary"} className="gap-1">
+        <Badge variant={isPublic ? "outline" : "outline"} className="gap-1">
           {isPublic ? <Globe className="h-3 w-3" /> : <Lock className="h-3 w-3" />}
           <span className="capitalize text-xs">{row.original.visibility.toLowerCase()}</span>
         </Badge>
