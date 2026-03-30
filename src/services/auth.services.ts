@@ -264,3 +264,14 @@ export async function logoutUser() {
         redirect("/login");
     }
 }
+export async function setOAuthTokens(accessToken: string, refreshToken: string, sessionToken: string) {
+    if (accessToken) {
+        await setTokenInCookies("accessToken", accessToken);
+    }
+    if (refreshToken) {
+        await setTokenInCookies("refreshToken", refreshToken);
+    }
+    if (sessionToken) {
+        await setTokenInCookies("better-auth.session_token", sessionToken, 24 * 60 * 60);
+    }
+}
