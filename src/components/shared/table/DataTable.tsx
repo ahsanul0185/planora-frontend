@@ -14,6 +14,7 @@ import DataTableFilters, {
 } from "./DataTableFilters";
 import DataTablePagination from "./DataTablePagination";
 import DataTableSearch from "./DataTableSearch";
+import React from "react";
 
 interface DataTableActions<TData> {
     onView ?: (data : TData) => void;
@@ -24,6 +25,12 @@ interface DataTableActions<TData> {
        edit?: string;
        delete?: string;
     };
+    customActions?: {
+        label: (data: TData) => string;
+        icon: React.ElementType;
+        onClick: (data: TData) => void;
+        show?: (data: TData) => boolean;
+    }[];
 }
 
 interface DataTableProps<TData> {
@@ -117,6 +124,19 @@ const DataTable = <TData,>({ data = [] as TData[], columns, actions, toolbarActi
                                         {actions.labels?.delete || "Delete Event"}
                                     </DropdownMenuItem>
                                 )
+                            }
+                            
+                            {
+                                actions.customActions?.map((action, idx) => {
+                                    if (action.show && !action.show(rowData)) return null;
+                                    const Icon = action.icon;
+                                    return (
+                                        <DropdownMenuItem key={idx} onClick={() => action.onClick(rowData)}>
+                                            <Icon className="mr-2 h-4 w-4" />
+                                            {action.label(rowData)}
+                                        </DropdownMenuItem>
+                                    );
+                                })
                             }
 
                         </DropdownMenuContent>

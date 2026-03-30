@@ -111,6 +111,7 @@ const EditEventModal = ({
       onlineLink: "",
       venueName: "",
       venueAddress: "",
+      mapEmbedCode: "",
       tags: "",
       currency: "USD",
     },
@@ -146,6 +147,7 @@ const EditEventModal = ({
         if (!isOnline) {
           if (value.venueName) formData.append("venueName", value.venueName);
           if (value.venueAddress) formData.append("venueAddress", value.venueAddress);
+          if (value.mapEmbedCode) formData.append("mapEmbedCode", value.mapEmbedCode);
         }
         if (value.tags) {
           formData.append("tags", value.tags.split(",").map((t) => t.trim()).filter(Boolean).join(","));
@@ -182,6 +184,7 @@ const EditEventModal = ({
       form.setFieldValue("onlineLink", event.onlineLink || "");
       form.setFieldValue("venueName", event.venueName || "");
       form.setFieldValue("venueAddress", event.venueAddress || "");
+      form.setFieldValue("mapEmbedCode", event.mapEmbedCode || "");
       form.setFieldValue(
         "tags",
         event.tags?.map((t) => t.name).join(", ") || ""
@@ -544,6 +547,23 @@ const EditEventModal = ({
                         label="Venue Address"
                         placeholder="Full address..."
                       />
+                    )}
+                  />
+                  <form.Field
+                    name="mapEmbedCode"
+                    children={(field) => (
+                      <div className="space-y-1.5">
+                        <Label htmlFor={field.name}>Google Maps Embed Code (Optional)</Label>
+                        <textarea
+                          id={field.name}
+                          value={field.state.value}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          onBlur={field.handleBlur}
+                          rows={3}
+                          placeholder="<iframe src='https://www.google.com/maps/embed?...' ...></iframe>"
+                          className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
+                        />
+                      </div>
                     )}
                   />
                 </div>

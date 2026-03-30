@@ -31,9 +31,10 @@ export interface IEvent {
   registrationDeadline: string | null;
   registrationFee: number;
   isOnline: boolean;
-  onlineLink: string | null;
-  venueName: string | null;
-  venueAddress: string | null;
+  venueName?: string | null;
+  venueAddress?: string | null;
+  mapEmbedCode?: string | null;
+  onlineLink?: string | null;
   status: EventStatus;
   visibility: EventVisibility;
   isFeatured: boolean;

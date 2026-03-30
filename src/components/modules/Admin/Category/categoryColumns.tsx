@@ -12,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Image from "next/image";
 
 interface CategoryColumnProps {
   onEdit: (category: IEventCategory) => void;
@@ -26,6 +25,7 @@ export const getCategoryColumns = ({
   {
     accessorKey: "icon",
     header: "Icon",
+    enableSorting: false,
     cell: ({ row }) => {
         const icon = row.original.icon;
         return (
@@ -49,38 +49,41 @@ export const getCategoryColumns = ({
   {
     accessorKey: "name",
     header: "Category Name",
+    enableSorting: false,
     cell: ({ row }) => <span className="font-medium">{row.original.name}</span>,
   },
   {
     id: "actions",
-    header: "Actions",
+    header: () => <div className="text-right pr-4">Actions</div>,
     cell: ({ row }) => {
       const category = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => onEdit(category)}>
-              <Edit className="mr-2 h-4 w-4" />
-              Edit Category
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => onDelete(category)}
-              className="text-destructive focus:text-destructive focus:bg-destructive/10"
-            >
-              <Trash2 className="mr-2 h-4 w-4" />
-              Delete Category
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="text-right pr-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => onEdit(category)}>
+                <Edit className="mr-2 h-4 w-4" />
+                Edit Category
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => onDelete(category)}
+                className="text-destructive focus:text-destructive focus:bg-destructive/10"
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Delete Category
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       );
     },
   },

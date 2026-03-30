@@ -209,6 +209,7 @@ const MyEventsTable = ({ initialParams }: MyEventsTableProps) => {
         open={isViewDialogOpen}
         onOpenChange={onViewOpenChange}
         event={viewingItem}
+        hideOrganizer
       />
 
       {/* Delete Confirmation Dialog */}

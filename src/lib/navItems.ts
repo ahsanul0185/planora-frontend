@@ -86,6 +86,11 @@ export const adminNavItems: NavSection[] = [
                 icon: "CalendarDays",
             },
             {
+                title: "Featured Events",
+                href: "/admin/dashboard/featured-events",
+                icon: "Star",
+            },
+            {
                 title: "Event Categories",
                 href: "/admin/dashboard/categories-management",
                 icon: "Tags",
@@ -93,7 +98,7 @@ export const adminNavItems: NavSection[] = [
             {
                 title: "Reviews",
                 href: "/admin/dashboard/reviews-management",
-                icon: "Star",
+                icon: "MessageSquare",
             },
         ],
     },

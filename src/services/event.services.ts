@@ -12,6 +12,7 @@ export interface IMyEventsQueryParams {
   status?: string;
   visibility?: string;
   categoryId?: string;
+  isFeatured?: boolean | string;
 }
 
 export const getMyOrganizedEvents = async (
@@ -77,6 +78,7 @@ export const getAllEvents = async (
   if (params.status) queryParams.status = params.status;
   if (params.visibility) queryParams.visibility = params.visibility;
   if (params.categoryId) queryParams.categoryId = params.categoryId;
+  if (params.isFeatured !== undefined) queryParams.isFeatured = params.isFeatured.toString();
 
   const res = await httpClient.get<IEvent[]>("/events", {
     params: queryParams,
@@ -86,4 +88,9 @@ export const getAllEvents = async (
     data: res.data,
     meta: res.meta ?? { page: 1, limit: 10, total: 0, totalPages: 1 },
   };
+};
+
+export const toggleFeaturedEvent = async (id: string) => {
+  const res = await httpClient.patch(`/events/${id}/feature`, {});
+  return res;
 };

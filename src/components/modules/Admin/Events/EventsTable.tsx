@@ -16,6 +16,9 @@ import {
 } from "@/hooks/useServerManagedDataTableFilters";
 import { useRowActionModalState } from "@/hooks/useRowActionModalState";
 import ViewEventDialog from "../../Organizer/OrganizedEvents/ViewEventDialog";
+import ToggleFeaturedDialog from "./ToggleFeaturedDialog";
+import { Star } from "lucide-react";
+import { useState } from "react";
 
 interface EventsTableProps {
   initialParams: IMyEventsQueryParams;
@@ -36,6 +39,14 @@ const EventsTable = ({ initialParams }: EventsTableProps) => {
     onViewOpenChange,
     tableActions,
   } = useRowActionModalState<IEvent>();
+
+  const [isFeatureDialogOpen, setIsFeatureDialogOpen] = useState(false);
+  const [featureEventSelection, setFeatureEventSelection] = useState<IEvent | null>(null);
+
+  const handleToggleFeatureAction = (event: IEvent) => {
+    setFeatureEventSelection(event);
+    setIsFeatureDialogOpen(true);
+  };
 
   const {
     optimisticSortingState,
@@ -144,6 +155,13 @@ const EventsTable = ({ initialParams }: EventsTableProps) => {
         }}
         actions={{
           onView: tableActions.onView,
+          customActions: [
+            {
+              label: (data) => (data.isFeatured ? "Remove from Featured" : "Add to Featured"),
+              icon: Star,
+              onClick: handleToggleFeatureAction,
+            },
+          ],
         }}
       />
 
@@ -151,6 +169,12 @@ const EventsTable = ({ initialParams }: EventsTableProps) => {
         open={isViewDialogOpen}
         onOpenChange={onViewOpenChange}
         event={viewingItem}
+      />
+
+      <ToggleFeaturedDialog
+        isOpen={isFeatureDialogOpen}
+        onClose={() => setIsFeatureDialogOpen(false)}
+        event={featureEventSelection}
       />
     </>
   );

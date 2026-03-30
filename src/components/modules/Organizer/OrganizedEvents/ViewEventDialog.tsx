@@ -25,13 +25,13 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getEventById } from "@/services/event.services";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface ViewEventDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   event: IEvent | null;
+  hideOrganizer?: boolean;
 }
 
 // ── tiny helpers ────────────────────────────────────────────────────────────
@@ -128,6 +128,7 @@ const ViewEventDialog = ({
   open,
   onOpenChange,
   event: initialEvent,
+  hideOrganizer = false,
 }: ViewEventDialogProps) => {
   const { data: fetchedEvent, isLoading } = useQuery({
     queryKey: ["event", initialEvent?.id],
@@ -193,6 +194,12 @@ const ViewEventDialog = ({
                   )}
                   {event.visibility}
                 </span>
+                {event.isFeatured && (
+                  <span className="rounded-full bg-amber-500 text-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider shadow flex items-center gap-1">
+                    <Star className="h-3 w-3 fill-white" />
+                    Featured
+                  </span>
+                )}
               </div>
 
               {/* bottom meta */}
@@ -218,8 +225,8 @@ const ViewEventDialog = ({
               </div>
             </div>
 
-            <ScrollArea className="flex-1 min-h-0">
-              <div className="px-6 py-6 space-y-7">
+            <div className="flex-1 overflow-y-auto min-h-0 relative">
+              <div className="px-6 py-6 space-y-7 pb-10">
 
                 {/* ── Stats row ──────────────────────────────────────────── */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -378,42 +385,23 @@ const ViewEventDialog = ({
                       </Row>
                     )}
                   </div>
+
+                  {/* Map Embed Code */}
+                  {event.mapEmbedCode && (
+                    <div className="sm:col-span-2 space-y-3 mt-4">
+                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                        Map
+                      </p>
+                      <div 
+                        className="w-full h-64 sm:h-80 rounded-xl overflow-hidden border bg-muted/30 [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:border-0"
+                        dangerouslySetInnerHTML={{ __html: event.mapEmbedCode }}
+                      />
+                    </div>
+                  )}
+
                 </div>
 
-                {/* ── Organizer ─────────────────────────────────────────── */}
-                <div className="space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                    Organizer
-                  </p>
-                  <div className="flex items-center gap-4 rounded-xl border bg-muted/30 p-4">
-                    <div className="h-11 w-11 shrink-0 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden ring-2 ring-background">
-                      {event.organizer?.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={event.organizer.image}
-                          alt={event.organizer.name}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <User className="h-5 w-5 text-primary" />
-                      )}
-                    </div>
-                    <div className="flex flex-col min-w-0">
-                      <span className="font-semibold text-sm truncate">
-                        {event.organizer?.name || "Unknown"}
-                      </span>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1 truncate">
-                        <Mail className="h-3 w-3 shrink-0" />
-                        {event.organizer?.email || "—"}
-                      </span>
-                    </div>
-                    <div className="ml-auto shrink-0">
-                      <Pill icon={CheckCircle2} variant="green">
-                        Organizer
-                      </Pill>
-                    </div>
-                  </div>
-                </div>
+
 
                 {/* ── Tags ─────────────────────────────────────────────── */}
                 {event.tags && event.tags.length > 0 && (
@@ -442,6 +430,43 @@ const ViewEventDialog = ({
                   </div>
                 )}
 
+                {/* ── Organizer ─────────────────────────────────────────── */}
+                {!hideOrganizer && (
+                  <div className="space-y-3">
+                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                      Organizer
+                    </p>
+                    <div className="flex items-center gap-4 rounded-xl border bg-muted/30 p-4">
+                      <div className="h-11 w-11 shrink-0 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden ring-2 ring-background">
+                        {event.organizer?.image ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={event.organizer.image}
+                            alt={event.organizer.name}
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <User className="h-5 w-5 text-primary" />
+                        )}
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-semibold text-sm truncate">
+                          {event.organizer?.name || "Unknown"}
+                        </span>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1 truncate">
+                          <Mail className="h-3 w-3 shrink-0" />
+                          {event.organizer?.email || "—"}
+                        </span>
+                      </div>
+                      <div className="ml-auto shrink-0">
+                        <Pill icon={CheckCircle2} variant="green">
+                          Organizer
+                        </Pill>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* ── Meta footer ───────────────────────────────────────── */}
                 <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-foreground border-t pt-4">
                   <span>
@@ -463,7 +488,7 @@ const ViewEventDialog = ({
                   )}
                 </div>
               </div>
-            </ScrollArea>
+            </div>
           </>
         ) : null}
       </DialogContent>

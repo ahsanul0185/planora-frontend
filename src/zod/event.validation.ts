@@ -15,6 +15,7 @@ export const eventValidationSchema = z.object({
   onlineLink: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   venueName: z.string().optional(),
   venueAddress: z.string().optional(),
+  mapEmbedCode: z.string().optional(),
   tags: z.string().optional(),
   currency: z.string().optional(),
 }).refine(data => {

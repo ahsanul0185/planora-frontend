@@ -5,7 +5,7 @@ import EventStatusBadge from "@/components/shared/cell/EventStatusBadge";
 import { Badge } from "@/components/ui/badge";
 import { IEvent } from "@/types/event.types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Globe, Lock, Monitor, MapPin, User } from "lucide-react";
+import { Globe, Lock, Monitor, MapPin, User, Star } from "lucide-react";
 
 export const adminEventsColumns: ColumnDef<IEvent>[] = [
   {
@@ -16,7 +16,15 @@ export const adminEventsColumns: ColumnDef<IEvent>[] = [
       const event = row.original;
       return (
         <div className="flex flex-col gap-1 max-w-[260px]">
-          <span className="font-medium text-sm leading-tight line-clamp-2">{event.title}</span>
+          <div className="flex items-start gap-2">
+            <span className="font-medium text-sm leading-tight line-clamp-2">{event.title}</span>
+            {event.isFeatured && (
+              <Badge variant="secondary" className="bg-amber-100 text-amber-800 hover:bg-amber-100 border-amber-200 gap-1 px-1.5 py-0.5 text-[10px] shrink-0 font-semibold leading-none">
+                <Star className="h-2.5 w-2.5 fill-amber-500 text-amber-500" />
+                Featured
+              </Badge>
+            )}
+          </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             {event.isOnline ? (
               <Monitor className="h-3 w-3 shrink-0" />
