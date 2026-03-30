@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Planora | The Digital Maître D’</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container": "#edeeeb",
+              "surface-variant": "#e2e3e0",
+              "on-secondary-container": "#58685f",
+              "surface-container-low": "#f3f4f1",
+              "on-background": "#191c1b",
+              "background": "#f9faf6",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-high": "#e7e9e5",
+              "on-surface-variant": "#404944",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#d8c4a2",
+              "on-secondary": "#ffffff",
+              "primary-fixed-dim": "#9ed2bb",
+              "inverse-surface": "#2e312f",
+              "primary": "oklch(37.49% 0.08137 162.73)",
+              "tertiary": "#392d15",
+              "surface-container-highest": "#e2e3e0",
+              "primary-container": "#1a4d3c",
+              "on-primary-fixed": "#002116",
+              "secondary-fixed-dim": "#b9cbc0",
+              "inverse-primary": "#9ed2bb",
+              "secondary-fixed": "#d5e7db",
+              "inverse-on-surface": "#f0f1ee",
+              "tertiary-fixed": "#f5e0bd",
+              "error": "#ba1a1a",
+              "outline-variant": "#c0c9c3",
+              "on-tertiary-container": "#c3b08f",
+              "surface": "#f9faf6",
+              "secondary-container": "#d5e7db",
+              "surface-dim": "#d9dad7",
+              "on-secondary-fixed-variant": "#3b4a42",
+              "surface-bright": "#f9faf6",
+              "on-primary-fixed-variant": "#1d4f3e",
+              "outline": "#707974",
+              "on-surface": "#191c1b",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#b9eed6",
+              "on-tertiary-fixed-variant": "#53452b",
+              "tertiary-container": "#514329",
+              "on-secondary-fixed": "#101e18",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-container": "#8abda7",
+              "on-primary": "#ffffff",
+              "secondary": "#526259",
+              "surface-tint": "#366855",
+              "on-tertiary-fixed": "#241a05"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9faf6;
+            color: #191c1b;
+        }
+        .glass-nav {
+            background-color: rgba(249, 250, 246, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-8 py-6 max-w-[1440px] left-1/2 -translate-x-1/2 z-50 glass-nav shadow-[0_20px_40px_rgba(25,28,27,0.04)]">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-['Newsreader'] font-bold tracking-[-0.02em] text-primary">Planora</span>
+<div class="hidden lg:flex gap-8 items-center">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1" href="#">Home</a>
+<a class="text-[#191c1b]/60 font-['Inter'] font-medium hover:text-primary transition-colors" href="#">Events</a>
+<a class="text-[#191c1b]/60 font-['Inter'] font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#191c1b]/60 font-['Inter'] font-medium hover:text-primary transition-colors">Login</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-full font-['Inter'] text-xs font-bold tracking-widest uppercase hover:opacity-90 transition-all">Signup</button>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="px-8 max-w-[1440px] mx-auto mb-32 grid lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="font-['Inter'] text-[0.75rem] tracking-[0.1rem] uppercase text-primary mb-6 block font-bold">Featured Orchestration</span>
+<div class="mb-4">
+<span class="text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">October 24, 2024</span>
+</div>
+<h1 class="font-['Newsreader'] text-[4rem] lg:text-[5.5rem] leading-[0.95] tracking-tight text-primary mb-8 -ml-1">
+                    The Art of the <br/>Perfect Gathering.
+                </h1>
+<p class="font-['Inter'] text-lg text-on-surface-variant max-w-xl leading-relaxed mb-10">
+                    Beyond event management. Planora is your digital maître d’, curating sophisticated experiences for those who value time, taste, and seamless execution.
+                </p>
+<div class="flex gap-4">
+<button class="bg-primary text-white px-10 py-4 rounded-full font-['Inter'] text-[0.75rem] font-bold tracking-[0.1rem] uppercase shadow-lg">Join Event</button>
+<button class="bg-surface-container-highest text-on-surface px-10 py-4 rounded-full font-['Inter'] text-[0.75rem] font-bold tracking-[0.1rem] uppercase">Learn More</button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
+<img alt="Elegant candlelit dinner party" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMCA_9t6V3PUhigmH6ROkUbE2WNooYb4vHWjL79bzNo1sRsgUj-duuTyac4tbmzW0pPcDzgayjjDl5MvjlRqNbE6vc7hmLtHFi7wPMKaz4Kxy-ZMWdP6JYjmr9WyTqnniRR8bfI9MiFzFN1tm4b034Jj1cAkgqVnwWZ6AE9u957MO1DZTCBn1YuyKpYzjp-vx3O2ZyfoWjmFu1LsAex0YGIysriiLhVR1lT2UPunpwTpc_czkd3lVVUyJM50q_SGf_wjsfcEk8FF3Y"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-surface-container-lowest p-8 rounded-xl shadow-xl max-w-[240px]">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="auto_awesome">auto_awesome</span>
+<p class="font-['Newsreader'] text-xl text-primary font-medium">Every detail curated to perfection.</p>
+</div>
+</div>
+</section>
+<!-- Upcoming Events Slider -->
+<section class="px-8 max-w-[1440px] mx-auto mb-40 overflow-hidden">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-['Newsreader'] text-4xl text-primary font-medium">Upcoming Public Events</h2>
+<p class="font-['Inter'] text-on-surface-variant mt-2">Open doors to extraordinary collective experiences.</p>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 overflow-x-auto no-scrollbar pb-8">
+<!-- Card 1-9 Loop equivalent -->
+<div class="min-w-[320px] bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="aspect-video bg-surface-container overflow-hidden">
+<img alt="Event" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn-aY_OGBpsCgwIAvt5oHMNsKkTntzIqf88bYFE3IqA_raDyaq9Bj3W4sGkzRg8rGudmTyLWud7dveNrOzx_QSlLyAsQWAwpTEpReL1JnD2DPjBYtNW2W-4-TFzO9iLaPNiEKRq6F0lW_VVs-k9z8b4EsYSdC970s95VDEhaqvyp7KVn0BczNU_3skrgpYByaku6VH4fh_sEcnBuEOXaeomCy30dvXhVz641G4_8PfA-zUVIoczk-bgQ30FKU4UVl-fv_cNbtZsjAg"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary/10 text-primary text-[0.6rem] font-bold tracking-widest uppercase px-2 py-1 rounded">Paid</span>
+<span class="text-xs font-medium text-on-surface-variant">Nov 12</span>
+</div>
+<h3 class="font-['Newsreader'] text-xl text-primary font-bold mb-2">Modernism Redefined</h3>
+<p class="text-xs text-on-surface-variant mb-4">by <span class="font-bold">Gallery X</span></p>
+<button class="w-full py-3 rounded-lg border border-primary/20 text-primary text-[0.7rem] font-bold tracking-widest uppercase hover:bg-primary hover:text-white transition-all">View Details</button>
+</div>
+</div>
+<!-- Repeat cards for 9 items -->
+<div class="min-w-[320px] bg-white rounded-xl overflow-hidden shadow-sm">
+<div class="aspect-video bg-surface-container overflow-hidden">
+<img alt="Event" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEHYcXbRN6IP_5J0xZU391RLdNdHrLvN_F6zxvctGtvwBdsQUMXUOGSwV0yMsFvwBcCzt-cM6GlhMy44tWy18EjB_FdlFK1hogWtXhdqP8Q38ySTKjlchVKgSEVC1iNetbTsrYB9J2B_w5TMA8cEG_btXcJsn97U3Pw95xefm-p7mkLoaV9-foGcOJ59n92lWOs-HhUCO7EoCQ54WjTxTdaWtT8o4aPYf4-0klm9O9d1oWqv6idt0UzJLpWoI0_ZB5f9rtmeLpSN_t"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-secondary-container text-on-secondary-fixed-variant text-[0.6rem] font-bold tracking-widest uppercase px-2 py-1 rounded">Free</span>
+<span class="text-xs font-medium text-on-surface-variant">Nov 15</span>
+</div>
+<h3 class="font-['Newsreader'] text-xl text-primary font-bold mb-2">The Wine Circle</h3>
+<p class="text-xs text-on-surface-variant mb-4">by <span class="font-bold">Reserve Estates</span></p>
+<button class="w-full py-3 rounded-lg border border-primary/20 text-primary text-[0.7rem] font-bold tracking-widest uppercase hover:bg-primary hover:text-white transition-all">View Details</button>
+</div>
+</div>
+<div class="min-w-[320px] bg-white rounded-xl overflow-hidden shadow-sm">
+<div class="aspect-video bg-surface-container overflow-hidden">
+<img alt="Event" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx3ZIGq-UpbxPQxlKacV2Ov5664bl1WuqHhcuyz6e_zNza-cm40p7aOllV8jxcG6TCuazY_i4qGKxj0oCo63ykQpKVaz94xRDIa4YmsNLa7_UcEZwASKAT7D3AjHlAjay_1BuHSm6HMQGnSAjqo0s-QJKy1Wf8hObo_U7VbX0wezBA6ESPZ96gLZNTnHuV8iFlbB5f5_OpZPa4MYE-d6lzK3vgOHR3-VPPCh2UEovCI5UzkF3_5R0Qd3L6lcwCc7XMdgT2XBupsO1z"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary/10 text-primary text-[0.6rem] font-bold tracking-widest uppercase px-2 py-1 rounded">Paid</span>
+<span class="text-xs font-medium text-on-surface-variant">Nov 20</span>
+</div>
+<h3 class="font-['Newsreader'] text-xl text-primary font-bold mb-2">Global Impact Summit</h3>
+<p class="text-xs text-on-surface-variant mb-4">by <span class="font-bold">Summit Co.</span></p>
+<button class="w-full py-3 rounded-lg border border-primary/20 text-primary text-[0.7rem] font-bold tracking-widest uppercase hover:bg-primary hover:text-white transition-all">View Details</button>
+</div>
+</div>
+<!-- 4 to 9 placeholders omitted for brevity but UI is set -->
+</div>
+</section>
+<!-- Featured Orchestrations (Bento Style) -->
+<section class="px-8 max-w-[1440px] mx-auto mb-40">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-['Newsreader'] text-4xl text-primary font-medium">Featured Orchestrations</h2>
+<p class="font-['Inter'] text-on-surface-variant mt-2">Curated selections from the world's most exclusive organizers.</p>
+</div>
+<a class="text-primary font-bold border-b-2 border-primary/20 hover:border-primary pb-1 transition-all" href="#">View All Events</a>
+</div>
+<div class="grid lg:grid-cols-4 grid-rows-2 gap-6 h-[700px]">
+<div class="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Dramatic high-fashion gala runway" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn-aY_OGBpsCgwIAvt5oHMNsKkTntzIqf88bYFE3IqA_raDyaq9Bj3W4sGkzRg8rGudmTyLWud7dveNrOzx_QSlLyAsQWAwpTEpReL1JnD2DPjBYtNW2W-4-TFzO9iLaPNiEKRq6F0lW_VVs-k9z8b4EsYSdC970s95VDEhaqvyp7KVn0BczNU_3skrgpYByaku6VH4fh_sEcnBuEOXaeomCy30dvXhVz641G4_8PfA-zUVIoczk-bgQ30FKU4UVl-fv_cNbtZsjAg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
+<span class="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-2">Exhibition</span>
+<h3 class="font-['Newsreader'] text-3xl mb-4">Avant-Garde Architecture Week</h3>
+<button class="text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn">Request Invitation <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span></button>
+</div>
+</div>
+<div class="lg:col-span-2 lg:row-span-1 relative group overflow-hidden rounded-xl bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Private wine tasting event" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEHYcXbRN6IP_5J0xZU391RLdNdHrLvN_F6zxvctGtvwBdsQUMXUOGSwV0yMsFvwBcCzt-cM6GlhMy44tWy18EjB_FdlFK1hogWtXhdqP8Q38ySTKjlchVKgSEVC1iNetbTsrYB9J2B_w5TMA8cEG_btXcJsn97U3Pw95xefm-p7mkLoaV9-foGcOJ59n92lWOs-HhUCO7EoCQ54WjTxTdaWtT8o4aPYf4-0klm9O9d1oWqv6idt0UzJLpWoI0_ZB5f9rtmeLpSN_t"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+<span class="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">Culinary</span>
+<h3 class="font-['Newsreader'] text-2xl">The Sommelier's Secret Reserve</h3>
+</div>
+</div>
+<div class="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High-tech executive conference room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx3ZIGq-UpbxPQxlKacV2Ov5664bl1WuqHhcuyz6e_zNza-cm40p7aOllV8jxcG6TCuazY_i4qGKxj0oCo63ykQpKVaz94xRDIa4YmsNLa7_UcEZwASKAT7D3AjHlAjay_1BuHSm6HMQGnSAjqo0s-QJKy1Wf8hObo_U7VbX0wezBA6ESPZ96gLZNTnHuV8iFlbB5f5_OpZPa4MYE-d6lzK3vgOHR3-VPPCh2UEovCI5UzkF3_5R0Qd3L6lcwCc7XMdgT2XBupsO1z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+<span class="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">Corporate</span>
+<h3 class="font-['Newsreader'] text-xl">Executive Summit</h3>
+</div>
+</div>
+<div class="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-surface-container-low">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Intimate jazz club performance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyo0zv8MdlQ1uEwtW3sTqoZORQeHSJQ7jedJ_GkADn2DwVagz4suqv6AyqYDU4JFX4IdBsmTa9KWuTEIkMY0BZ8X4B6qL1S4TYTOD7MD66Q-gXlubnHI1I0we3Q1Pw_Y2g-wzfzlHLMXcRguBWkoMsJEduw5KGijo7B2G9GJ2_TnxctuZSyKkTBKEGNOCwpCc0UQoBWDqezIbdKRICoEJaFVfMpWLRrxM7UMkf1gV5Q2o2vNeY9WEHDa3YeSywQk0zmBeM-qDhO3AP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+<span class="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">Performance</span>
+<h3 class="font-['Newsreader'] text-xl">Midnight Jazz Series</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Event Categories & Filters -->
+<section class="px-8 max-w-[1440px] mx-auto mb-40">
+<div class="text-center mb-16">
+<h2 class="font-['Newsreader'] text-4xl text-primary font-medium">Refined Access</h2>
+<p class="font-['Inter'] text-on-surface-variant mt-2">Filter by exclusivity and value</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="bg-white p-10 rounded-2xl text-center group hover:bg-primary transition-all cursor-pointer shadow-sm">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="lock_open">lock_open</span>
+</div>
+<span class="font-['Inter'] font-bold text-xs uppercase tracking-widest text-primary group-hover:text-white">Public Free</span>
+</div>
+<div class="bg-white p-10 rounded-2xl text-center group hover:bg-primary transition-all cursor-pointer shadow-sm">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="payments">payments</span>
+</div>
+<span class="font-['Inter'] font-bold text-xs uppercase tracking-widest text-primary group-hover:text-white">Public Paid</span>
+</div>
+<div class="bg-white p-10 rounded-2xl text-center group hover:bg-primary transition-all cursor-pointer shadow-sm">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="key">key</span>
+</div>
+<span class="font-['Inter'] font-bold text-xs uppercase tracking-widest text-primary group-hover:text-white">Private Free</span>
+</div>
+<div class="bg-white p-10 rounded-2xl text-center group hover:bg-primary transition-all cursor-pointer shadow-sm">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-white text-3xl" data-icon="verified">verified</span>
+</div>
+<span class="font-['Inter'] font-bold text-xs uppercase tracking-widest text-primary group-hover:text-white">Private Paid</span>
+</div>
+</div>
+</section>
+<!-- Voices of the Circle (Testimonials) -->
+<section class="px-8 max-w-[1440px] mx-auto mb-40">
+<div class="grid lg:grid-cols-2 gap-20 items-center">
+<div class="relative">
+<div class="aspect-square rounded-full overflow-hidden w-full max-w-md mx-auto">
+<img class="w-full h-full object-cover" data-alt="Portrait of Julian Montgomery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUJM6-nk-Rug_HBAcsxsrlYh9bNq--RL5Ccr1LeBAiVTU0Rn1yRgo8QqvlNHfuEBFcuzMxhcx8Y1UXUqTOZVQ6touK8P1Hd7OYWMZzIv1ZJMAHYDRJudE6kPtoFvyFvxOqTSapRI8z6vHFqOFZXSpsTiMmcmAfuacc1ot5MIUboHfXweb_30nes9V-X1sUUlO19AvMEcuh8X0egcfTK2v8QmfHlZnTM2o18Xc7cwYOMs3XxBBZ4RbAsKzMCSMLYCvwc31Kyyw70Mll"/>
+</div>
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full flex items-center justify-center -translate-y-1/2">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="format_quote">format_quote</span>
+</div>
+</div>
+<div>
+<h2 class="font-['Newsreader'] text-4xl text-primary font-medium mb-12">Voices of the Circle</h2>
+<blockquote class="mb-12">
+<p class="font-['Newsreader'] text-3xl leading-tight text-on-surface mb-8">
+                            "Planora has transformed how we approach high-ticket event management. The editorial interface isn't just a skin; it's a statement of quality that our clients recognize immediately."
+                        </p>
+<cite class="not-italic">
+<span class="block font-['Inter'] font-bold text-primary uppercase tracking-[0.1rem] text-sm">Julian Montgomery</span>
+<span class="block font-['Inter'] text-on-surface-variant text-sm mt-1">Founding Director, Apex Curations</span>
+</cite>
+</blockquote>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="px-8 max-w-[1440px] mx-auto mb-40">
+<div class="bg-primary text-white p-16 lg:p-24 rounded-3xl relative overflow-hidden text-center">
+<div class="absolute inset-0 opacity-10">
+<img alt="Crowd background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDILnpfme97Q_OQp9KmjvKKNdaWqsPmuT22lr-8wBzGIDhF0Wm-pAP-nsfENXxQl3afNMcAIpeXTpMs38isPOxK2F36mUMRHCjTX8B3qa94zN3M-_s7v5FabUXdgCrGFC3B8s5Aau9NljYtNn4hPOeGG3Iihu-PTENHGOF4g1mTA4YRd3lQd-AFfUfcRtnZF3r6pGIa7bWighB0sI6yye5qqTyGJ4QzFDVdmXbBqFsHpEihZn2DtWHz2RQsosKH-U1hq4pSvSH-CkLg"/>
+</div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="font-['Newsreader'] text-5xl lg:text-6xl font-medium mb-8">Begin Your Next Chapter.</h2>
+<p class="font-['Inter'] text-lg opacity-80 mb-12">Whether hosting an intimate gathering or a global summit, Planora provides the digital infrastructure for excellence.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-white text-primary px-12 py-4 rounded-full font-['Inter'] text-[0.75rem] font-bold tracking-[0.1rem] uppercase">Create Events</button>
+<button class="border border-white/30 text-white px-12 py-4 rounded-full font-['Inter'] text-[0.75rem] font-bold tracking-[0.1rem] uppercase hover:bg-white/10 transition-all">Join Events</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full rounded-t-[2rem] pt-24 pb-12 px-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-16">
+<div class="col-span-2 lg:col-span-2">
+<span class="font-['Newsreader'] text-3xl font-bold text-primary block mb-6">Planora</span>
+<p class="font-['Inter'] text-[#191c1b]/70 leading-[1.6x] max-w-sm mb-8">
+                The Digital Maître D’ for modern tastemakers and visionary organizers. Curating the world's finest moments, one detail at a time.
+            </p>
+<div class="flex gap-6">
+<a class="text-primary hover:opacity-100 opacity-80 transition-all" href="#"><span class="material-symbols-outlined" data-icon="brand_awareness">brand_awareness</span></a>
+<a class="text-primary hover:opacity-100 opacity-80 transition-all" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
+<a class="text-primary hover:opacity-100 opacity-80 transition-all" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-['Inter'] font-bold text-[0.65rem] uppercase tracking-widest text-primary mb-6">Platform</h4>
+<ul class="space-y-4">
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Features</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Pricing</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">For Organizers</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Events Archive</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-['Inter'] font-bold text-[0.65rem] uppercase tracking-widest text-primary mb-6">Company</h4>
+<ul class="space-y-4">
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">About</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Careers</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Contact</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-['Inter'] font-bold text-[0.65rem] uppercase tracking-widest text-primary mb-6">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Privacy Policy</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Terms of Service</a></li>
+<li><a class="text-[#191c1b]/70 font-['Inter'] text-sm hover:underline decoration-1 underline-offset-4 transition-all" href="#">Cookie Settings</a></li>
+</ul>
+</div>
+<div class="col-span-full border-t border-outline-variant/30 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="font-['Inter'] text-xs text-[#191c1b]/50">© 2024 Planora. The Digital Maître D’.</span>
+<div class="flex gap-8 items-center">
+<span class="text-xs font-['Inter'] text-[#191c1b]/50">Designed for Visionaries</span>
+<span class="w-1 h-1 rounded-full bg-primary/20"></span>
+<span class="text-xs font-['Inter'] text-[#191c1b]/50">Available Globally</span>
+</div>
+</div>
+</footer>
+</body></html>
