@@ -1,18 +1,18 @@
 
 export function Testimonials() {
   return (
-    <section className="px-8 max-w-[1440px] mx-auto mb-40">
+    <section className="px-8 max-w-[1440px] mx-auto my-40">
       <div className="grid lg:grid-cols-2 gap-20 items-center">
         <div className="relative">
-          <div className="aspect-square rounded-full overflow-hidden w-full max-w-md mx-auto">
+          <div className="aspect-square rounded-3xl overflow-hidden w-full max-w-md mx-auto">
             <img
               className="w-full h-full object-cover"
               alt="Portrait of Julian Montgomery"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUJM6-nk-Rug_HBAcsxsrlYh9bNq--RL5Ccr1LeBAiVTU0Rn1yRgo8QqvlNHfuEBFcuzMxhcx8Y1UXUqTOZVQ6touK8P1Hd7OYWMZzIv1ZJMAHYDRJudE6kPtoFvyFvxOqTSapRI8z6vHFqOFZXSpsTiMmcmAfuacc1ot5MIUboHfXweb_30nes9V-X1sUUlO19AvMEcuh8X0egcfTK2v8QmfHlZnTM2o18Xc7cwYOMs3XxBBZ4RbAsKzMCSMLYCvwc31Kyyw70Mll"
             />
           </div>
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full flex items-center justify-center -translate-y-1/2">
-            <span className="material-symbols-outlined text-white text-4xl">format_quote</span>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-2xl flex items-center justify-center -translate-y-1/2">
+            <span className="material-symbols-outlined text-white text-8xl">format_quote</span>
           </div>
         </div> 
         <div>

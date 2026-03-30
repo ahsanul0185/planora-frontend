@@ -35,7 +35,7 @@ export function HeroSection() {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMCA_9t6V3PUhigmH6ROkUbE2WNooYb4vHWjL79bzNo1sRsgUj-duuTyac4tbmzW0pPcDzgayjjDl5MvjlRqNbE6vc7hmLtHFi7wPMKaz4Kxy-ZMWdP6JYjmr9WyTqnniRR8bfI9MiFzFN1tm4b034Jj1cAkgqVnwWZ6AE9u957MO1DZTCBn1YuyKpYzjp-vx3O2ZyfoWjmFu1LsAex0YGIysriiLhVR1lT2UPunpwTpc_czkd3lVVUyJM50q_SGf_wjsfcEk8FF3Y"
           />
         </div>
-        <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-xl shadow-xl max-w-[240px]">
+        <div className="absolute -bottom-8 -left-8 bg-white/80 backdrop-blur-md p-8 rounded-xl shadow-xl max-w-[240px]">
           <span className="material-symbols-outlined text-primary mb-2 text-3xl">auto_awesome</span>
           <p className="font-newsreader text-xl text-primary font-medium">Every detail curated to perfection.</p>
         </div>

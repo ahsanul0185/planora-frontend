@@ -12,7 +12,7 @@ interface HomeNavbarProps {
 
 export function HomeNavbar({ userInfo }: HomeNavbarProps) {
   return (
-    <nav className="fixed top-5 max-w-[1440px] w-full flex justify-between items-center px-8 py-6 left-1/2 -translate-x-1/2 z-50 bg-[#f9faf6]/80 backdrop-blur-[20px] shadow-[0_20px_40px_rgba(25,28,27,0.04)] rounded-xl">
+    <nav className="fixed top-5 max-w-[1440px] w-full border border-primary/10 flex justify-between items-center px-8 py-6 left-1/2 -translate-x-1/2 z-50 bg-[#f9faf6]/80 backdrop-blur-[20px] shadow-[0_20px_40px_rgba(25,28,27,0.04)] rounded-xl">
       <div className="flex items-center gap-12">
         <Link href="/" className="flex items-center">
           <Image src="/planora-logo.png" alt="Planora" width={150} height={20} className="h-5 w-auto object-contain" />

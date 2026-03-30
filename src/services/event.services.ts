@@ -13,6 +13,7 @@ export interface IMyEventsQueryParams {
   visibility?: string;
   categoryId?: string;
   isFeatured?: boolean | string;
+  isFree?: string;
 }
 
 export const getMyOrganizedEvents = async (
@@ -40,6 +41,11 @@ export const getMyOrganizedEvents = async (
 
 export const getEventById = async (id: string): Promise<IDetailedEvent> => {
   const res = await httpClient.get<IDetailedEvent>(`/events/${id}`);
+  return res.data;
+};
+
+export const getEventBySlug = async (slug: string): Promise<IDetailedEvent> => {
+  const res = await httpClient.get<IDetailedEvent>(`/events/slug/${slug}`);
   return res.data;
 };
 
@@ -78,6 +84,7 @@ export const getAllEvents = async (
   if (params.status) queryParams.status = params.status;
   if (params.visibility) queryParams.visibility = params.visibility;
   if (params.categoryId) queryParams.categoryId = params.categoryId;
+  if (params.isFree) queryParams.isFree = params.isFree;
   if (params.isFeatured !== undefined) queryParams.isFeatured = params.isFeatured.toString();
 
   const res = await httpClient.get<IEvent[]>("/events", {
