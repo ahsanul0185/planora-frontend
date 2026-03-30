@@ -8,7 +8,7 @@ export const metadata = {
   description: "Manage event categories and their icons.",
 };
 
-const CategoriesManagementPage = async () => {
+const CategoriesManagementPage2 = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -39,4 +39,4 @@ const CategoriesManagementPage = async () => {
   );
 };
 
-export default CategoriesManagementPage;
+export default CategoriesManagementPage2;
