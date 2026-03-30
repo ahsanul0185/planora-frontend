@@ -24,9 +24,9 @@ interface DashboardSidebarContentProps {
 const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : DashboardSidebarContentProps) => {
     const pathname = usePathname()
   return (
-    <div className="hidden md:flex h-full w-60 flex-col border-r border-border/40 bg-background overflow-y-auto">
+    <div className="hidden md:flex h-full w-60 flex-col border-r border-border/40 bg-background overflow-hidden">
       {/* Logo / Brand */}
-      <div className="flex h-20 items-center px-6">
+      <div className="flex h-20 shrink-0 items-center px-6">
         <Link href={dashboardHome} className="flex items-center gap-2">
           <Image 
             src="/planora-logo.png" 
@@ -40,7 +40,7 @@ const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : Dashboard
       </div>
 
       {/* Navigation Area */}
-      <ScrollArea className="flex-1 px-3 py-4">
+      <ScrollArea className="flex-1 min-h-0 px-3 py-4">
         <nav className="space-y-6">
           {navItems.map((section, sectionId) => (
             <div key={sectionId}>
@@ -86,7 +86,7 @@ const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : Dashboard
       </ScrollArea>
 
       {/* User Dropdown At Bottom */}
-      <div className="border-t px-3 py-4">
+      <div className="shrink-0 border-t px-3 py-4">
         <UserDropdown userInfo={userInfo} />
       </div>
     </div>
