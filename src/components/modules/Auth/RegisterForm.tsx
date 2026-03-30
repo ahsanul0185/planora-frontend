@@ -125,7 +125,7 @@ const RegisterForm = () => {
                         {selectedRole === "PARTICIPANT" ? "Participant" : "Organizer"}
                     </span>
                 </div>
-                <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
+                <CardTitle className="text-3xl font-newsreader font-semibold text-primary">Create Account</CardTitle>
                 <CardDescription>
                     Fill in your details to get started.
                 </CardDescription>
@@ -189,6 +189,7 @@ const RegisterForm = () => {
                                         onClick={() => setShowPassword((value) => !value)}
                                         variant="ghost"
                                         size="icon"
+                                        className="hover:bg-transparent focus-visible:ring-0"
                                     >
                                         {showPassword ? (
                                             <EyeOff className="size-4" aria-hidden="true" />

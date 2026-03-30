@@ -25,6 +25,7 @@ type AppFieldProps = {
     prepend ?: React.ReactNode;
     className ?: string;
     disabled ?: boolean;
+    maxLength ?: number;
 }
 
 const AppField = ({
@@ -36,6 +37,7 @@ const AppField = ({
     prepend,
     className,
     disabled = false,
+    maxLength,
 } : AppFieldProps) => {
 
     const firstError = field.state.meta.isTouched && field.state.meta.errors.length > 0 ? getErrorMessage(field.state.meta.errors[0]) : null;
@@ -74,6 +76,7 @@ const AppField = ({
                     append && "pr-10",
                     hasError && "border-destructive focus-visible:ring-destructive/20",
                 )}
+                maxLength={maxLength}
             />
 
             {
@@ -81,19 +84,18 @@ const AppField = ({
                     {append}
                 </div>)
             }
-
-            {
-                hasError && (
-                    <p
-                     id={`${field.name}-error`}
-                     role="alert"
-                     className="text-sm text-destructive" 
-                    >
-                        {firstError}
-                    </p>
-                )
-            }
         </div>
+        {
+            hasError && (
+                <p
+                    id={`${field.name}-error`}
+                    role="alert"
+                    className="text-sm text-destructive mt-1" 
+                >
+                    {firstError}
+                </p>
+            )
+        }
     </div>
   )
 }

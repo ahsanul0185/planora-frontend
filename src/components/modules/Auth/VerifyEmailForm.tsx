@@ -69,7 +69,7 @@ const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
                 <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
                     <ShieldCheck className="h-7 w-7 text-emerald-700" />
                 </div>
-                <CardTitle className="text-2xl font-bold tracking-tight">
+                <CardTitle className="text-3xl font-newsreader font-semibold text-primary">
                     Verify Your Email
                 </CardTitle>
                 <CardDescription className="text-sm leading-relaxed mt-1">

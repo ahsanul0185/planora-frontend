@@ -54,7 +54,7 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
   return (
     <Card className="w-full max-w-md mx-auto shadow-md">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Welcome Back!</CardTitle>
+        <CardTitle className="text-3xl font-newsreader font-semibold text-primary">Welcome Back!</CardTitle>
         <CardDescription>
           Please enter your credentials to log in.
         </CardDescription>
@@ -101,10 +101,11 @@ const LoginForm = ({ redirectPath }: LoginFormProps) => {
                 className="cursor-pointer"
                 append={
                   <Button
-                  type="button"
+                    type="button"
                     onClick={() => setShowPassword((value) => !value)}
                     variant="ghost"
                     size="icon"
+                    className="hover:bg-transparent focus-visible:ring-0"
                   >
                     {showPassword ? (
                       <EyeOff className="size-4" aria-hidden="true" />
