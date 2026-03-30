@@ -1,6 +1,7 @@
 import { HomeNavbar } from "@/components/shared/home/HomeNavbar";
 import { HomeFooter } from "@/components/shared/home/HomeFooter";
 import { getUserInfo } from "@/services/auth.services";
+export const dynamic = "force-dynamic";
 
 export default async function CommonLayout({
   children,

@@ -85,9 +85,9 @@ export async function registerUser(payload: IRegisterPayload, redirectPath?: str
         const { accessToken, refreshToken, token, user } = response.data;
         const { email } = user;
         
-        await setTokenInCookies("accessToken", accessToken);
-        await setTokenInCookies("refreshToken", refreshToken);
-        await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60);
+        // await setTokenInCookies("accessToken", accessToken);
+        // await setTokenInCookies("refreshToken", refreshToken);
+        // await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60);
 
         // redirect to verify email always since the new user is not verified
         redirect(`/verify-email?email=${email}`);
@@ -115,12 +115,21 @@ export async function verifyEmail(payload: IVerifyEmailPayload, email: string) {
     }
 
     try {
-        await httpClient.post("/auth/verify-email", { email, otp: parsedPayload.data.otp });
+        const response = await httpClient.post<ILoginResponse>("/auth/verify-email", { email, otp: parsedPayload.data.otp });
         
-        // Use user info from cookies to redirect right away
-        const userInfo = await getUserInfo();
-        const role = userInfo?.role;
-        const targetPath = getDefaultDashboardRoute(role as UserRole || "PARTICIPANT");
+        const { accessToken, refreshToken, token, user } = response.data;
+
+        if (accessToken) {
+            await setTokenInCookies("accessToken", accessToken);
+        }
+        if (refreshToken) {
+            await setTokenInCookies("refreshToken", refreshToken);
+        }
+        if (token) {
+            await setTokenInCookies("better-auth.session_token", token, 24 * 60 * 60);
+        }
+
+        const targetPath = getDefaultDashboardRoute(user?.role as UserRole || "PARTICIPANT");
         redirect(targetPath);
         
     } catch (error: any) {

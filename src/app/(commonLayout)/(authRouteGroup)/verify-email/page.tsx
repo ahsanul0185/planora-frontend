@@ -14,7 +14,9 @@ const VerifyEmailPage = async ({ searchParams }: VerifyEmailParams) => {
   }
 
   return (
-    <VerifyEmailForm email={email} />
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 bg-gradient-to-br from-[#f9faf6] via-[#f0f4ef] to-[#e8f0e8]">
+      <VerifyEmailForm email={email} />
+    </div>
   )
 }
 
