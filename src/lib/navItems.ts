@@ -18,6 +18,11 @@ export const getCommonNavItems = (role: UserRole): NavSection[] => {
                     href: `/my-profile`,
                     icon: "User",
                 },
+                {
+                    title: "Payment History",
+                    href: "/payment-history",
+                    icon: "CreditCard"
+                }
             ]
         },
         {
