@@ -15,6 +15,12 @@ export interface IReview {
   deletedAt?: string | null;
   createdAt: string;
   updatedAt: string;
+  event ?: {
+    id: string;
+    title: string;
+    bannerImage: string | null;
+    startDate: string;
+  };
 }
 
 export interface IReviewQueryParams {

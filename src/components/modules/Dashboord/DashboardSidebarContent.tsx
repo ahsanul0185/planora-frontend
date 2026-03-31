@@ -27,7 +27,7 @@ const DashboardSidebarContent = ({dashboardHome, navItems, userInfo} : Dashboard
     <div className="hidden md:flex h-full w-60 flex-col border-r border-border/40 bg-background overflow-hidden">
       {/* Logo / Brand */}
       <div className="flex h-20 shrink-0 items-center px-6">
-        <Link href={dashboardHome} className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Image 
             src="/planora-logo.png" 
             alt="Planora Logo" 

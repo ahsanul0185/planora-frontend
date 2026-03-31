@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function MyProfileLoading() {
+export default function OrganizerLoading() {
   return (
     <div className="h-[90vh] flex items-center justify-center">
       <div className="animate-pulse">

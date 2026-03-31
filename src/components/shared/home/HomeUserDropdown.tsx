@@ -18,8 +18,8 @@ export const HomeUserDropdown = ({ userInfo }: HomeUserDropdownProps) => {
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <button className="flex items-center justify-center rounded-full transition-colors focus:outline-none ring-2 ring-primary/20 hover:ring-primary/40">
-                <div className="h-10 w-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
-                    <span className="text-sm font-semibold text-primary">
+                <div className="h-8 w-8 md:h-10 md:w-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors">
+                    <span className="text-xs md:text-sm font-semibold text-primary">
                         {userInfo.name.charAt(0).toUpperCase()}
                     </span>
                 </div>

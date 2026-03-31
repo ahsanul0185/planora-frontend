@@ -22,6 +22,7 @@ import JoinEventButton from "@/components/modules/EventParticipation/JoinEventBu
 import { getCurrencySymbol } from "@/lib/utils";
 import EventActions from "@/components/modules/EventParticipation/EventActions";
 import { getMyBookmarks } from "@/services/bookmark.services";
+import EventReviews from "@/components/modules/Events/EventReviews";
 
 interface EventPageProps {
   params: Promise<{ slug: string }>;
@@ -222,6 +223,8 @@ export default async function EventDetailsPage({ params }: EventPageProps) {
 )}
 </div>
 </section>
+      <div className="h-px bg-[#e0e3e0] opacity-20"></div>
+      <EventReviews eventId={event.id} />
 </div>
 
 <div className="lg:col-span-4 space-y-8 mt-20">

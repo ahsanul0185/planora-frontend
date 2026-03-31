@@ -56,6 +56,7 @@ export interface IEvent {
     participations: number;
     reviews: number;
   };
+  reviews?: any[];
 }
 
 export interface IDetailedEvent extends Omit<IEvent, 'organizer'> {

@@ -44,10 +44,10 @@ export function Testimonials() {
   const current = TESTIMONIALS[index];
 
   return (
-    <section className="px-8 max-w-[1440px] mx-auto my-40">
-      <div className="grid lg:grid-cols-2 gap-20 items-center">
+    <section className="px-6 md:px-8 max-w-[1440px] mx-auto my-24 md:my-40">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div className="relative">
-          <div className="aspect-square rounded-3xl overflow-hidden w-full max-w-md mx-auto relative">
+          <div className="aspect-square rounded-3xl overflow-hidden w-full max-w-[280px] sm:max-w-md mx-auto relative">
             <AnimatePresence mode="wait">
               <motion.img
                 key={current.id}
@@ -66,17 +66,17 @@ export function Testimonials() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-2xl flex items-center justify-center -translate-y-1/2 z-10"
+            className="absolute top-0 right-0 lg:right-0 w-20 h-20 md:w-32 md:h-32 bg-primary rounded-2xl flex items-center justify-center -translate-y-1/2 translate-x-4 md:translate-x-0 z-10"
           >
-            <span className="material-symbols-outlined text-white text-8xl">format_quote</span>
+            <span className="material-symbols-outlined text-white text-5xl md:text-8xl">format_quote</span>
           </motion.div>
         </div> 
-        <div className="overflow-hidden">
-          <h2 className="font-newsreader text-4xl text-primary font-medium mb-12">
+        <div className="overflow-hidden mt-8 lg:mt-0">
+          <h2 className="font-newsreader text-3xl md:text-4xl text-primary font-medium mb-8 md:mb-12">
             Voices of the Circle
           </h2>
           
-          <div className="relative min-h-[300px]">
+          <div className="relative min-h-[250px] md:min-h-[300px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.blockquote
                 key={current.id}
@@ -87,14 +87,14 @@ export function Testimonials() {
                 transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                 className="absolute inset-0"
               >
-                <p className="font-newsreader text-3xl leading-tight text-[#191c1b] mb-8">
+                <p className="font-newsreader text-2xl md:text-3xl leading-tight text-[#191c1b] mb-6 md:mb-8">
                   "{current.quote}"
                 </p>
                 <cite className="not-italic">
-                  <span className="block font-bold text-primary uppercase tracking-[0.1rem] text-sm">
+                  <span className="block font-bold text-primary uppercase tracking-[0.1rem] text-xs md:text-sm">
                     {current.name}
                   </span>
-                  <span className="block text-[#404944] text-sm mt-1">
+                  <span className="block text-[#404944] text-xs md:text-sm mt-1">
                     {current.role}
                   </span>
                 </cite>
@@ -102,18 +102,18 @@ export function Testimonials() {
             </AnimatePresence>
           </div>
 
-          <div className="flex gap-4 mt-12">
+          <div className="flex gap-4 mt-8 md:mt-12">
             <button 
               onClick={prev}
-              className="w-12 h-12 rounded-full border border-[#c0c9c3] flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all outline-none"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#c0c9c3] flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all outline-none cursor-pointer"
             >
-              <span className="material-symbols-outlined">chevron_left</span>
+              <span className="material-symbols-outlined text-sm md:text-base">chevron_left</span>
             </button>
             <button 
               onClick={next}
-              className="w-12 h-12 rounded-full border border-[#c0c9c3] flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all outline-none"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#c0c9c3] flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all outline-none cursor-pointer"
             >
-              <span className="material-symbols-outlined">chevron_right</span>
+              <span className="material-symbols-outlined text-sm md:text-base">chevron_right</span>
             </button>
           </div>
         </div>

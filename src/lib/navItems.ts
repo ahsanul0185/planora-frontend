@@ -101,16 +101,6 @@ export const adminNavItems: NavSection[] = [
                 icon: "MessageSquare",
             },
         ],
-    },
-    {
-        title: "Reports & Analytics",
-        items: [
-            {
-                title: "Revenue Reports",
-                href: "/admin/dashboard/revenue",
-                icon: "BarChart3",
-            },
-        ]
     }
 ];
 

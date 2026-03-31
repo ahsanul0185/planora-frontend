@@ -64,6 +64,12 @@ export default function JoinEventButton({
       return;
     }
 
+    // Role check for organizers trying to book other events
+    if (userInfo?.role === "ORGANIZER") {
+        toast.error("You must be logged in with a participant account to book events.");
+        return;
+    }
+
     setIsOpen(true);
   };
 

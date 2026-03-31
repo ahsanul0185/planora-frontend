@@ -18,13 +18,13 @@ export function UpcomingEvents() {
   const events = response?.data || [];
 
   return (
-    <section className="px-8 max-w-[1440px] mx-auto mb-40 overflow-hidden">
-      <div className="flex justify-between items-end mb-12">
+    <section className="px-6 md:px-8 max-w-[1440px] mx-auto mb-24 md:mb-40 overflow-hidden">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-6">
         <div>
-          <h2 className="font-newsreader text-4xl text-primary font-medium">Upcoming Public Events</h2>
-          <p className="text-[#404944] mt-2">Open doors to extraordinary collective experiences.</p>
+          <h2 className="font-newsreader text-3xl md:text-4xl text-primary font-medium">Upcoming Public Events</h2>
+          <p className="text-sm md:text-base text-[#404944] mt-2">Open doors to extraordinary collective experiences.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 self-end">
           <button
             onClick={() => api?.scrollPrev()}
             className="w-10 h-10 rounded-full border border-[#c0c9c3] flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
@@ -41,11 +41,11 @@ export function UpcomingEvents() {
       </div>
 
       <Carousel setApi={setApi} opts={{ align: "start", loop: true }} className="w-full">
-        <CarouselContent className="-ml-6 w-[calc(100%+24px)] pb-8">
+        <CarouselContent className="-ml-4 md:-ml-6 w-[calc(100%+16px)] md:w-[calc(100%+24px)] pb-8">
           {isLoading ? (
             Array.from({ length: 4 }).map((_, i) => (
-              <CarouselItem key={i} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/4">
-                <div className="h-[450px] bg-white rounded-xl animate-pulse" />
+              <CarouselItem key={i} className="pl-4 md:pl-6 basis-[85%] sm:basis-1/2 lg:basis-1/4">
+                <div className="h-[350px] md:h-[450px] bg-white rounded-xl animate-pulse" />
               </CarouselItem>
             ))
           ) : events.length === 0 ? (
@@ -54,9 +54,9 @@ export function UpcomingEvents() {
             </div>
           ) : (
             events.map((event: IEvent) => (
-              <CarouselItem key={event.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/4">
-                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full">
-                  <div className="aspect-video bg-[#edeeeb] overflow-hidden">
+              <CarouselItem key={event.id} className="pl-4 md:pl-6 basis-[85%] sm:basis-1/2 lg:basis-1/4">
+                <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full border border-primary/5">
+                  <div className="aspect-video relative bg-[#edeeeb] overflow-hidden">
                     <img
                       alt={event.title}
                       className="w-full h-full object-cover"
@@ -66,8 +66,8 @@ export function UpcomingEvents() {
                       }
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-4">
+                  <div className="p-5 md:p-6">
+                    <div className="flex justify-between items-start mb-3 md:mb-4">
                       {event.registrationFee > 0 ? (
                         <span className="bg-primary/10 text-primary text-[0.6rem] font-bold tracking-widest uppercase px-2 py-1 rounded">
                           Paid
@@ -77,19 +77,19 @@ export function UpcomingEvents() {
                           Free
                         </span>
                       )}
-                      <span className="text-xs font-medium text-[#404944]">
+                      <span className="text-[10px] md:text-xs font-medium text-[#404944]">
                         {new Date(event.startDate).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
                         })}
                       </span>
                     </div>
-                    <h3 className="font-newsreader text-xl text-primary font-bold mb-2 line-clamp-1">{event.title}</h3>
-                    <p className="text-xs text-[#404944] mb-4 line-clamp-1">
+                    <h3 className="font-newsreader text-lg md:text-xl text-primary font-bold mb-1 md:mb-2 line-clamp-1">{event.title}</h3>
+                    <p className="text-[10px] md:text-xs text-[#404944] mb-4 line-clamp-1">
                       by <span className="font-bold">{event.organizer?.name || "Organizer"}</span>
                     </p>
-                    <Link href={`/events/${event.id}`}>
-                      <button className="w-full py-3 rounded-lg border border-primary/20 text-primary text-[0.7rem] font-bold tracking-widest uppercase hover:bg-primary hover:text-white transition-all">
+                    <Link href={`/events/${event.slug}`}>
+                      <button className="w-full py-3 rounded-lg border border-primary/20 text-primary text-[0.65rem] md:text-[0.7rem] font-bold tracking-widest uppercase hover:bg-primary hover:text-white transition-all cursor-pointer">
                         View Details
                       </button>
                     </Link>

@@ -6,13 +6,16 @@ import { IMyJoinedEventsQueryParams } from "@/types/participant.types";
 import { IParticipation } from "@/types/participation.types";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { myJoinedEventsColumns } from "./myJoinedEventsColumns";
 import { useServerManagedDataTable } from "@/hooks/useServerManagedDataTable";
 import { useServerManagedDataTableSearch } from "@/hooks/useServerManagedDataTableSearch";
 import { useRowActionModalState } from "@/hooks/useRowActionModalState";
 import ViewEventDialog from "@/components/modules/Organizer/OrganizedEvents/ViewEventDialog";
 import { IEvent } from "@/types/event.types";
+import { Button } from "@/components/ui/button";
+import { Star } from "lucide-react";
+import WriteReviewModal from "./WriteReviewModal";
 
 interface MyJoinedEventsTableProps {
   initialParams: IMyJoinedEventsQueryParams;
@@ -20,6 +23,8 @@ interface MyJoinedEventsTableProps {
 
 const MyJoinedEventsTable = ({ initialParams }: MyJoinedEventsTableProps) => {
   const searchParams = useSearchParams();
+
+  const [reviewingItem, setReviewingItem] = useState<IParticipation | null>(null);
 
   const {
     viewingItem,
@@ -74,6 +79,40 @@ const MyJoinedEventsTable = ({ initialParams }: MyJoinedEventsTableProps) => {
     placeholderData: (prev) => prev,
   });
 
+  const columnsWithReviewAction = useMemo(() => [
+    ...myJoinedEventsColumns,
+    {
+      id: "review_action",
+      header: "",
+      enableSorting: false,
+      cell: ({ row }: { row: { original: IParticipation } }) => {
+        const part = row.original;
+        const event = part.event;
+        if (!event) return null;
+
+        const isConfirmed = part.status === "CONFIRMED";
+        const hasStarted = new Date(event.startDate) <= new Date();
+        const hasReviewed = event.reviews && event.reviews.length > 0;
+
+        if (isConfirmed && hasStarted && !hasReviewed) {
+          return (
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-1.5 text-xs border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:border-amber-900/50 dark:bg-amber-950/50 dark:text-amber-400"
+              onClick={() => setReviewingItem(part)}
+            >
+              <Star className="h-3.5 w-3.5 fill-current" />
+              Write Review
+            </Button>
+          );
+        }
+
+        return null;
+      },
+    }
+  ], []);
+
   // The viewing item is an IParticipation; we need the nested event for the dialog
   const viewingEvent = viewingItem?.event ?? null;
 
@@ -81,7 +120,7 @@ const MyJoinedEventsTable = ({ initialParams }: MyJoinedEventsTableProps) => {
     <>
       <DataTable<IParticipation>
         data={data?.data ?? []}
-        columns={myJoinedEventsColumns}
+        columns={columnsWithReviewAction}
         isLoading={isFetching || isRouteRefreshPending}
         meta={data?.meta}
         emptyMessage="You haven't joined any events yet."
@@ -107,6 +146,16 @@ const MyJoinedEventsTable = ({ initialParams }: MyJoinedEventsTableProps) => {
         open={isViewDialogOpen}
         onOpenChange={onViewOpenChange}
         event={viewingEvent as IEvent | null}
+      />
+
+      {/* Write Review Modal */}
+      <WriteReviewModal
+        open={!!reviewingItem}
+        onOpenChange={(open) => {
+          if (!open) setReviewingItem(null);
+        }}
+        eventId={reviewingItem?.event?.id ?? null}
+        eventTitle={reviewingItem?.event?.title ?? null}
       />
     </>
   );

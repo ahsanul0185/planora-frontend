@@ -24,101 +24,101 @@ export function FeaturedOrchestrations() {
   ];
 
   return (
-    <section className="px-8 max-w-[1440px] mx-auto mb-40">
-      <div className="flex justify-between items-end mb-12">
+    <section className="px-6 md:px-8 max-w-[1440px] mx-auto mb-24 md:mb-40">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4">
         <div>
-          <h2 className="font-newsreader text-4xl text-primary font-medium">Featured Orchestrations</h2>
-          <p className="text-[#404944] mt-2">Curated selections from the world's most exclusive organizers.</p>
+          <h2 className="font-newsreader text-3xl md:text-4xl text-primary font-medium">Featured Orchestrations</h2>
+          <p className="text-sm md:text-base text-[#404944] mt-2">Curated selections from the world's most exclusive organizers.</p>
         </div>
-        <Link href="/events" className="text-primary font-newsreader border-b-2 border-primary/20 hover:border-primary pb-1 transition-all">
+        <Link href="/events" className="text-primary font-newsreader border-b-2 border-primary/20 hover:border-primary pb-1 transition-all text-sm md:text-base">
           View All Events
         </Link>
       </div>
 
       {isLoading ? (
-        <div className="grid lg:grid-cols-4 grid-rows-2 gap-6 h-[700px]">
-           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-2 lg:row-span-2 animate-pulse" />
-           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-2 lg:row-span-1 animate-pulse" />
-           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-1 lg:row-span-1 animate-pulse" />
-           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-1 lg:row-span-1 animate-pulse" />
+        <div className="grid lg:grid-cols-4 lg:grid-rows-2 gap-6 h-auto md:h-[700px]">
+           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-2 lg:row-span-2 animate-pulse h-[300px] md:h-auto" />
+           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-2 lg:row-span-1 animate-pulse h-[200px] md:h-auto" />
+           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-1 lg:row-span-1 animate-pulse h-[200px] md:h-auto" />
+           <div className="bg-[#e7e9e5] rounded-xl lg:col-span-1 lg:row-span-1 animate-pulse h-[200px] md:h-auto" />
         </div>
       ) : (
-        <div className="grid lg:grid-cols-4 grid-rows-2 gap-6 h-[700px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-4 md:gap-6 lg:h-[700px]">
           {/* Main Large Item */}
           {events[0] ? (
-            <Link href={`/events/${events[0].slug}`} className="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[0].slug}`} className="md:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl bg-[#f3f4f1] aspect-[4/3] md:aspect-auto">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[0].title}
                 src={events[0].bannerImage || fallbackImages[0]}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
-                <span className="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-2">{events[0].category?.name || "Curated"}</span>
-                <h3 className="font-newsreader text-3xl mb-4">{events[0].title}</h3>
-                <button className="text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+                <span className="text-[0.6rem] md:text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-2">{events[0].category?.name || "Curated"}</span>
+                <h3 className="font-newsreader text-2xl md:text-3xl mb-4">{events[0].title}</h3>
+                <button className="text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn">
                   Request Invitation <span className="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
                 </button>
               </div>
             </Link>
           ) : (
-            <div className="lg:col-span-2 lg:row-span-2 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center">
+            <div className="md:col-span-2 lg:row-span-2 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center h-[300px] md:h-auto">
               <span className="text-[#404944]">Featured Event Slot A</span>
             </div>
           )}
 
           {/* Top Right Item */}
           {events[1] ? (
-            <Link href={`/events/${events[1].slug}`} className="lg:col-span-2 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[1].slug}`} className="md:col-span-2 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1] aspect-video md:aspect-auto">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[1].title}
                 src={events[1].bannerImage || fallbackImages[1]}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">{events[1].category?.name || "Curated"}</span>
-                <h3 className="font-newsreader text-2xl">{events[1].title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-5 md:p-6 text-white">
+                <span className="text-[0.6rem] md:text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">{events[1].category?.name || "Curated"}</span>
+                <h3 className="font-newsreader text-xl md:text-2xl">{events[1].title}</h3>
               </div>
             </Link>
           ) : (
-            <div className="lg:col-span-2 lg:row-span-1 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center">
+            <div className="md:col-span-2 lg:row-span-1 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center h-[200px] md:h-auto">
               <span className="text-[#404944]">Featured Event Slot B</span>
             </div>
           )}
 
           {/* Bottom Right Item 1 */}
           {events[2] ? (
-            <Link href={`/events/${events[2].slug}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[2].slug}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1] aspect-square lg:aspect-auto">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[2].title}
                 src={events[2].bannerImage || fallbackImages[2]}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">{events[2].category?.name || "Corporate"}</span>
-                <h3 className="font-newsreader text-xl">{events[2].title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-5 md:p-6 text-white">
+                <span className="text-[0.6rem] md:text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">{events[2].category?.name || "Corporate"}</span>
+                <h3 className="font-newsreader text-lg md:text-xl">{events[2].title}</h3>
               </div>
             </Link>
           ) : (
-            <div className="lg:col-span-1 lg:row-span-1 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center">
+            <div className="lg:col-span-1 lg:row-span-1 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center h-[200px] md:h-auto">
               <span className="text-[#404944]">Featured Slot C</span>
             </div>
           )}
 
           {/* Bottom Right Item 2 */}
           {events[3] ? (
-            <Link href={`/events/${events[3].slug}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[3].slug}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1] aspect-square lg:aspect-auto">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[3].title}
                 src={events[3].bannerImage || fallbackImages[3]}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">{events[3].category?.name || "Performance"}</span>
-                <h3 className="font-newsreader text-xl">{events[3].title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-5 md:p-6 text-white">
+                <span className="text-[0.6rem] md:text-[0.65rem] tracking-[0.1rem] font-bold uppercase mb-1">{events[3].category?.name || "Performance"}</span>
+                <h3 className="font-newsreader text-lg md:text-xl">{events[3].title}</h3>
               </div>
             </Link>
           ) : (
-            <div className="lg:col-span-1 lg:row-span-1 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center">
+            <div className="lg:col-span-1 lg:row-span-1 rounded-xl bg-[#f3f4f1] border border-dashed border-[#c0c9c3] flex items-center justify-center h-[200px] md:h-auto">
               <span className="text-[#404944]">Featured Slot D</span>
             </div>
           )}

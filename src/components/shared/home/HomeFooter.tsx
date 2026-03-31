@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function HomeFooter() {
   return (
-    <footer className="bg-[#f3f4f1] w-full rounded-t-[2rem] pt-24 pb-12 px-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-16 max-w-[1440px] mx-auto mt-40">
+    <footer className="bg-[#f3f4f1] w-full rounded-t-[2rem] pt-12 md:pt-24 pb-12 px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-16 max-w-[1440px] mx-auto mt-40">
       <div className="col-span-2 lg:col-span-2">
         <Link href="/" className="inline-block mb-6">
           <Image src="/planora-logo.png" alt="Planora" width={150} height={20} className="h-5 w-auto object-contain" />

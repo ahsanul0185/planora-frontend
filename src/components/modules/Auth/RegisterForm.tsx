@@ -60,7 +60,7 @@ const RegisterForm = () => {
         return (
             <div className="w-full max-w-2xl mx-auto py-8 mt-32">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold mb-2">Join Planora</h1>
+                    <h1 className="text-3xl text-primary font-newsreader font-bold mb-2">Join Planora</h1>
                     <p className="text-muted-foreground">Select how you want to use the platform</p>
                 </div>
                 
@@ -69,7 +69,7 @@ const RegisterForm = () => {
                         className="cursor-pointer hover:border-primary transition-colors h-full flex flex-col"
                         onClick={() => setSelectedRole("PARTICIPANT")}
                     >
-                        <CardHeader className="text-center">
+                        <CardHeader className="text-center font-newsreader">
                             <div className="mx-auto bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                                 <User className="w-8 h-8 text-primary" />
                             </div>
@@ -87,7 +87,7 @@ const RegisterForm = () => {
                         className="cursor-pointer hover:border-primary transition-colors h-full flex flex-col"
                         onClick={() => setSelectedRole("ORGANIZER")}
                     >
-                        <CardHeader className="text-center">
+                        <CardHeader className="text-center font-newsreader">
                             <div className="mx-auto bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                                 <Building className="w-8 h-8 text-primary" />
                             </div>
