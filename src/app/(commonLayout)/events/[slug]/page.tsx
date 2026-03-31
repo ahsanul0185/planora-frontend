@@ -17,6 +17,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { getUserInfo } from "@/services/auth.services";
+import JoinEventButton from "@/components/modules/EventParticipation/JoinEventButton";
+import { getCurrencySymbol } from "@/lib/utils";
+import EventActions from "@/components/modules/EventParticipation/EventActions";
+import { getMyBookmarks } from "@/services/bookmark.services";
 
 interface EventPageProps {
   params: Promise<{ slug: string }>;
@@ -24,6 +29,7 @@ interface EventPageProps {
 
 export default async function EventDetailsPage({ params }: EventPageProps) {
   const { slug } = await params;
+  const userInfo = await getUserInfo();
   
   let event;
   try {
@@ -34,6 +40,16 @@ export default async function EventDetailsPage({ params }: EventPageProps) {
   }
 
   if (!event) notFound();
+
+  let isBookmarked = false;
+  if (userInfo) {
+    try {
+      const bookmarks = await getMyBookmarks();
+      isBookmarked = bookmarks.some((b: any) => b.id === event.id);
+    } catch (error) {
+      console.error("Failed to fetch bookmarks:", error);
+    }
+  }
 
   const isPast = new Date(event.startDate) < new Date();
   const isFree = event.registrationFee === 0;
@@ -87,18 +103,23 @@ export default async function EventDetailsPage({ params }: EventPageProps) {
 </div>
 <div className="lg:col-span-4 flex justify-end">
 <div className="w-full max-w-sm p-8 rounded-2xl bg-[#ffffff] shadow-[0_32px_64px_-16px_rgba(24,28,27,0.1)]">
-<div className="flex justify-between items-start mb-6">
-<span className="text-sm font-['Inter'] text-[#3f4945] font-bold uppercase tracking-widest">Entry Fee</span>
-<span className="text-2xl font-newsreader font-extrabold text-[#004337]">
-    {isFree ? "Free Entry" : `${event.currency} ${event.registrationFee.toFixed(2)}`}
+<div className="flex justify-between items-center mb-6">
+<div className="flex flex-col gap-1.5">
+<span className="text-xs font-['Inter'] text-[#3f4945] font-bold uppercase tracking-widest">Entry Fee</span>
+<span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider w-fit shadow-sm ${event.visibility === 'PUBLIC' ? 'bg-[#d1e7e2] text-[#004337]' : 'bg-[#e6e9e6] text-[#3f4945]'}`}>
+    {event.visibility === 'PUBLIC' ? 'Public Event' : 'Private Event'}
 </span>
 </div>
-<button 
-    disabled={isPast}
+<span className="text-3xl font-newsreader font-extrabold text-[#004337]">
+    {isFree ? "Free Entry" : `${getCurrencySymbol(event.currency || 'USD')}${event.registrationFee.toFixed(2)}`}
+</span>
+</div>
+<JoinEventButton 
+    event={event} 
+    userInfo={userInfo} 
+    isPast={isPast}
     className={`w-full py-4 bg-gradient-to-br from-[#004337] to-[#005d4d] text-[#ffffff] font-bold rounded-lg mb-4 active:scale-[0.98] transition-all ${isPast ? "opacity-50 grayscale cursor-not-allowed" : ""}`}
->
-    {isPast ? "Event Concluded" : (isFree ? "Register Now" : "Pay & Join")}
-</button>
+/>
 <div className="space-y-2">
   <p className="text-center text-xs text-[#3f4945]">
       {event.maxParticipants ? `Limited capacity: ${event.maxParticipants} spaces.` : "Open to all registered attendees."}
@@ -131,18 +152,17 @@ export default async function EventDetailsPage({ params }: EventPageProps) {
         <p className="font-['Inter'] font-bold text-[#004337]">Save to Calendar</p>
       </div>
       <div className="flex items-center gap-3">
-        <button className="p-3 rounded-xl hover:bg-[#ecefec] transition-colors">
-          <Share2 className="h-5 w-5 text-[#004337]" />
-        </button>
-        <button className="p-3 rounded-xl hover:bg-[#ecefec] transition-colors">
-          <Heart className="h-5 w-5 text-[#004337]" />
-        </button>
-        <button 
-           disabled={isPast}
+        <EventActions 
+          event={event} 
+          userInfo={userInfo} 
+          initialBookmarked={isBookmarked} 
+        />
+        <JoinEventButton 
+           event={event} 
+           userInfo={userInfo} 
+           isPast={isPast}
            className={`px-8 py-3 bg-[#004337] text-[#ffffff] font-bold rounded-xl active:scale-95 transition-all ${isPast ? "opacity-50 grayscale cursor-not-allowed" : ""}`}
-        >
-          {isPast ? "Closed" : (isFree ? "Register" : `Join — ${event.currency} ${event.registrationFee}`)}
-        </button>
+        />
       </div>
     </div>
   </div>
@@ -209,7 +229,7 @@ export default async function EventDetailsPage({ params }: EventPageProps) {
 <div className="p-8 rounded-2xl bg-[#f1f4f1]">
 <h3 className="text-sm text-[#3f4945] font-bold uppercase tracking-widest mb-6">Organized By</h3>
 <div className="flex items-center gap-4 mb-6">
-<div className="w-14 h-14 rounded-full bg-[#e6e9e6] flex items-center justify-center overflow-hidden border border-[#d1e7e2]">
+<div className="w-14 h-14 rounded-full bg-[#d1e7e2] flex items-center justify-center overflow-hidden border-2 border-[#bec9c4]">
   {event.organizer?.image ? (
     <img alt={event.organizer.name} className="w-full h-full object-cover" src={event.organizer.image} />
   ) : (

@@ -3,12 +3,17 @@
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getAllEvents, IMyEventsQueryParams } from "@/services/event.services";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import Image from "next/image";
 import { Calendar, ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { getUserInfo } from "@/services/auth.services";
+import { getMyBookmarks } from "@/services/bookmark.services";
+import BookmarkButton from "./BookmarkButton";
+import { UserInfo } from "@/types/user.types";
+import { IEvent } from "@/types/event.types";
 
 interface EventsListProps {
   initialParams: IMyEventsQueryParams;
@@ -28,6 +33,7 @@ const EventsList = ({ initialParams }: EventsListProps) => {
       visibility: searchParams.get("visibility") || undefined,
       categoryId: searchParams.get("categoryId") || undefined,
       isFree: searchParams.get("isFree") || undefined,
+      isFeatured: searchParams.get("isFeatured") || undefined,
     };
   }, [searchParams, initialParams]);
 
@@ -37,6 +43,25 @@ const EventsList = ({ initialParams }: EventsListProps) => {
     staleTime: 1000 * 60 * 5,
     placeholderData: (prev) => prev,
   });
+
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [bookmarks, setBookmarks] = useState<IEvent[]>([]);
+
+  useEffect(() => {
+    const fetchUserAndBookmarks = async () => {
+      const user = await getUserInfo();
+      setUserInfo(user);
+      if (user) {
+        try {
+          const userBookmarks = await getMyBookmarks();
+          setBookmarks(userBookmarks || []);
+        } catch (error) {
+          console.error("Failed to fetch bookmarks:", error);
+        }
+      }
+    };
+    fetchUserAndBookmarks();
+  }, [userInfo?.id]);
 
   const events = data?.data ?? [];
 
@@ -63,18 +88,17 @@ const EventsList = ({ initialParams }: EventsListProps) => {
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
+            <BookmarkButton 
+              event={event} 
+              userInfo={userInfo} 
+              initialBookmarked={bookmarks.some(b => b.id === event.id)} 
+            />
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1 bg-[#d1e7e2] text-[#374b47] text-[10px] font-bold rounded-md uppercase tracking-wider">
                 {event.visibility === "PUBLIC" ? (event.registrationFee === 0 ? "Public Free" : "Public Paid") : (event.registrationFee === 0 ? "Private Free" : "Private Paid")}
               </span>
             </div>
-            {event.isFeatured && (
-              <div className="absolute top-4 right-4">
-                <span className="px-3 py-1 bg-[#004337] text-[#a6f1dc] text-[10px] font-bold rounded-md uppercase tracking-wider">
-                  Featured
-                </span>
-              </div>
-            )}
+            
           </div>
           
           <div className="p-8 flex flex-col flex-grow">
@@ -93,10 +117,16 @@ const EventsList = ({ initialParams }: EventsListProps) => {
             <h3 className="font-newsreader text-2xl font-bold tracking-tight text-[#181c1b] mb-1 group-hover:text-[#004337] transition-colors leading-tight">
               {event.title}
             </h3>
-            <p className="text-[#3f4945] text-[13px] font-medium mb-4 italic opacity-60">
+            <p className="text-[#3f4945] text-[13px] font-medium mb-3 italic opacity-60">
               Curated by {event.organizer?.name}
             </p>
-
+            {event.isFeatured && (
+              <div className="mb-3">
+                <span className="px-3 py-1 bg-[#004337] text-[#a6f1dc] text-[10px] font-bold rounded-md uppercase tracking-wider">
+                  Featured
+                </span>
+              </div>
+            )}
             <p className="text-[#3f4945] text-sm leading-relaxed line-clamp-3 mb-6 opacity-80 font-light">
               {event.description}
             </p>

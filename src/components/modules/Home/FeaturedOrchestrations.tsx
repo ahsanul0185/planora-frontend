@@ -30,7 +30,7 @@ export function FeaturedOrchestrations() {
           <h2 className="font-newsreader text-4xl text-primary font-medium">Featured Orchestrations</h2>
           <p className="text-[#404944] mt-2">Curated selections from the world's most exclusive organizers.</p>
         </div>
-        <Link href="/events" className="text-primary font-bold border-b-2 border-primary/20 hover:border-primary pb-1 transition-all">
+        <Link href="/events" className="text-primary font-newsreader border-b-2 border-primary/20 hover:border-primary pb-1 transition-all">
           View All Events
         </Link>
       </div>
@@ -46,7 +46,7 @@ export function FeaturedOrchestrations() {
         <div className="grid lg:grid-cols-4 grid-rows-2 gap-6 h-[700px]">
           {/* Main Large Item */}
           {events[0] ? (
-            <Link href={`/events/${events[0].id}`} className="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[0].slug}`} className="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[0].title}
@@ -68,7 +68,7 @@ export function FeaturedOrchestrations() {
 
           {/* Top Right Item */}
           {events[1] ? (
-            <Link href={`/events/${events[1].id}`} className="lg:col-span-2 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[1].slug}`} className="lg:col-span-2 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[1].title}
@@ -87,7 +87,7 @@ export function FeaturedOrchestrations() {
 
           {/* Bottom Right Item 1 */}
           {events[2] ? (
-            <Link href={`/events/${events[2].id}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[2].slug}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[2].title}
@@ -106,7 +106,7 @@ export function FeaturedOrchestrations() {
 
           {/* Bottom Right Item 2 */}
           {events[3] ? (
-            <Link href={`/events/${events[3].id}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
+            <Link href={`/events/${events[3].slug}`} className="lg:col-span-1 lg:row-span-1 relative group overflow-hidden rounded-xl bg-[#f3f4f1]">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 alt={events[3].title}

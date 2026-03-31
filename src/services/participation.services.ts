@@ -51,6 +51,31 @@ export const cancelParticipation = async (eventId: string) => {
   return res;
 };
 
+export const joinPublicFreeEvent = async (eventId: string) => {
+  const res = await httpClient.post(`/participations/${eventId}/join`, {});
+  return res;
+};
+
+export const requestPrivateFreeEvent = async (eventId: string) => {
+  const res = await httpClient.post(`/participations/${eventId}/request`, {});
+  return res;
+};
+
+export const joinPublicPaidEvent = async (
+  eventId: string
+): Promise<{ paymentUrl: string }> => {
+  const res = await httpClient.post<{ paymentUrl: string }>(
+    `/participations/${eventId}/pay-join`,
+    {}
+  );
+  return res.data;
+};
+
+export const requestPrivatePaidEvent = async (eventId: string) => {
+  const res = await httpClient.post(`/participations/${eventId}/pay-request`, {});
+  return res;
+};
+
 export const initiatePaymentForApprovedParticipation = async (
   eventId: string
 ): Promise<{ paymentUrl: string }> => {

@@ -25,6 +25,7 @@ const EventPagination = () => {
       visibility: searchParams.get("visibility") || undefined,
       categoryId: searchParams.get("categoryId") || undefined,
       isFree: searchParams.get("isFree") || undefined,
+      isFeatured: searchParams.get("isFeatured") || undefined,
     };
   }, [searchParams]);
 

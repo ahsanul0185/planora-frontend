@@ -18,6 +18,7 @@ const buildQueryParams = (urlParams: { [key: string]: string | string[] | undefi
     visibility: urlParams.visibility as string | undefined,
     categoryId: urlParams.categoryId as string | undefined,
     isFree: urlParams.isFree as string | undefined,
+    isFeatured: urlParams.isFeatured as string | undefined,
   };
 };
 
@@ -39,7 +40,7 @@ const EventsPage = async ({ searchParams }: EventsPageProps) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="pt-40 pb-32 min-h-screen bg-[#f7faf7] relative">
+      <main className="pt-40 pb-32 min-h-screen bg-[#f7 faf7] bg-[#fcfcfc] relative">
         <div className="max-w-[1440px] mx-auto px-8">
           {/* Editorial Header */}
           <header className="mb-24">

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#241a05",
+              "error": "#ba1a1a",
+              "primary": "#003627",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#002116",
+              "on-tertiary-fixed-variant": "#53452b",
+              "surface": "#f9faf6",
+              "on-surface": "#191c1b",
+              "on-background": "#191c1b",
+              "inverse-surface": "#2e312f",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e2e3e0",
+              "on-surface-variant": "#404944",
+              "on-secondary-fixed-variant": "#3b4a42",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "surface-container-low": "#f3f4f1",
+              "on-secondary-container": "#58685f",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#f0f1ee",
+              "tertiary-fixed-dim": "#d8c4a2",
+              "surface-bright": "#f9faf6",
+              "primary-fixed": "#b9eed6",
+              "on-tertiary-container": "#c3b08f",
+              "surface-container": "#edeeeb",
+              "primary-container": "#1a4d3c",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#707974",
+              "tertiary-container": "#514329",
+              "tertiary": "#392d15",
+              "primary-fixed-dim": "#9ed2bb",
+              "secondary-fixed": "#d5e7db",
+              "on-primary-fixed-variant": "#1d4f3e",
+              "surface-tint": "#366855",
+              "tertiary-fixed": "#f5e0bd",
+              "background": "#f9faf6",
+              "secondary-container": "#d5e7db",
+              "inverse-primary": "#9ed2bb",
+              "secondary": "#526259",
+              "on-secondary-fixed": "#101e18",
+              "on-primary-container": "#8abda7",
+              "outline-variant": "#c0c9c3",
+              "on-secondary": "#ffffff",
+              "surface-container-high": "#e7e9e5",
+              "secondary-fixed-dim": "#b9cbc0",
+              "surface-dim": "#d9dad7",
+              "surface-container-highest": "#e2e3e0"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Newsreader', serif; }
+      .editorial-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; }
+      .glass-nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f9faf6]/80 dark:bg-emerald-950/80 backdrop-blur-md shadow-[0_20px_40px_rgba(25,28,27,0.04)]">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="font-['Newsreader'] text-2xl font-bold tracking-tighter text-[#003627] dark:text-emerald-400">Planora</div>
+<div class="hidden md:flex items-center space-gap-10 gap-12">
+<a class="text-[#191c1b]/70 dark:text-emerald-100/70 font-medium hover:text-[#003627] dark:hover:text-emerald-300 transition-colors duration-300" href="#">Discover</a>
+<a class="text-[#003627] dark:text-emerald-400 font-semibold border-b border-[#003627]" href="#">Our Story</a>
+<a class="text-[#191c1b]/70 dark:text-emerald-100/70 font-medium hover:text-[#003627] dark:hover:text-emerald-300 transition-colors duration-300" href="#">Services</a>
+<a class="text-[#191c1b]/70 dark:text-emerald-100/70 font-medium hover:text-[#003627] dark:hover:text-emerald-300 transition-colors duration-300" href="#">Partnerships</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2 rounded-xl text-[0.75rem] uppercase tracking-[0.1rem] font-bold">Get Started</button>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Section 1: Hero -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-16">
+<div class="md:col-span-8">
+<span class="font-label text-[0.75rem] uppercase tracking-[0.2rem] text-primary mb-6 block">Our Narrative</span>
+<h1 class="text-6xl md:text-8xl font-headline tracking-tighter text-primary leading-[0.9]">Orchestrating the Extraordinary.</h1>
+</div>
+<div class="md:col-span-4 pb-4">
+<p class="text-on-surface-variant leading-relaxed text-lg">We believe that every gathering is a performance, a curated symphony of moments designed to linger long after the last guest has departed.</p>
+</div>
+</div>
+<div class="w-full h-[716px] relative overflow-hidden rounded-xl">
+<img alt="Grand banquet hall" class="w-full h-full object-cover" data-alt="Interior of a high-end, contemporary event space with warm atmospheric lighting, long minimalist tables, and lush floral arrangements in a historical building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa4941jQOqbcfdsHbiE_rEo_foGdcZzBiaOh2JFK6mfmrZcLasSP-L7UHjY1Du-grK9PVIsjiPEVkwZEt3w_ItWSgUsFrMSLtlIvrBPCOTEmcTGAMR26pSU3gkg7uWj4MRlMA5BN8S9GaHmwxzWMxDkUJN2CoZoKX4RVez4psv_RjwvavH7rACz6bmuw58dgU6skCNd1iSCgrrLZmkL6bU_vyTmx8DohIg60WofLf5gNul-32gjVGdE2ftJOf_oMOhKHT9PVPTpxlJ"/>
+<div class="absolute inset-0 bg-primary/5"></div>
+</div>
+</section>
+<!-- Section 2: The Genesis -->
+<section class="bg-surface-container-low py-32 mb-32">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-20">
+<div class="md:col-span-5">
+<h2 class="text-4xl font-headline text-primary mb-8">The Genesis</h2>
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-sm">
+<img alt="Founder desk" class="w-full h-full object-cover" data-alt="Monochromatic workspace with architectural sketches, a vintage Leica camera, and high-end stationery on a dark wood surface with morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCsfj-XZfduChCgD55YDInrZZLP9bL9xsB_Rl_72jDbXjhNwEfle4QTRiXNNJbipFilCCodj06NemdMRAPlLFeRcLGQE5dGpf7klql7h6IzwQWEKlqEElgmzCZmQQFRjhDGFrcttC8VSjXHP-dcxzcKoXdVK3FatoOrwlXt9dKDxejn5UsdBgdqrcOknV-ZSRpW5IwdWD9SRl_MTyTlnqo-LDN140mi9ZdrAfcQOkZy-JESnijySj5_gerHPqPVu3TL1pxO2q_2dLs"/>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center">
+<p class="text-2xl font-headline text-on-surface mb-8 leading-snug">Planora was born from a simple realization: the digital age had optimized for logistics, but it had forgotten the soul of the host.</p>
+<div class="space-y-6 text-on-surface-variant leading-relaxed">
+<p>Our journey began in the atelier of experience design, where we saw a growing need for a "Digital Maître D’"—an authority that could handle the complexity of modern gatherings with the grace of a seasoned professional.</p>
+<p>We didn't just want to build a tool; we wanted to create a platform that understands the nuance of taste. For the modern tastemaker, an event is more than a date on a calendar; it is a manifestation of identity. Planora provides the framework to let that identity shine through precision orchestration.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Our Philosophy -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<div class="text-center mb-24">
+<span class="font-label text-[0.75rem] uppercase tracking-[0.2rem] text-primary mb-4 block">Foundations</span>
+<h2 class="text-5xl font-headline text-primary">The Three Pillars</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+<div class="flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors duration-500">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container text-3xl" data-icon="star">star</span>
+</div>
+<h3 class="text-2xl font-headline mb-4">Exclusivity</h3>
+<p class="text-on-surface-variant leading-relaxed px-4">Crafting moments that are unique to your vision, ensuring no two experiences are ever mirrored.</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors duration-500">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container text-3xl" data-icon="architecture">architecture</span>
+</div>
+<h3 class="text-2xl font-headline mb-4">Precision</h3>
+<p class="text-on-surface-variant leading-relaxed px-4">Mathematical accuracy in every detail, from guest curation to lighting sequences and floral timing.</p>
+</div>
+<div class="flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors duration-500">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary-container text-3xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h3 class="text-2xl font-headline mb-4">Experience</h3>
+<p class="text-on-surface-variant leading-relaxed px-4">Moving beyond utility to create emotional resonance that defines the high-end editorial standard.</p>
+</div>
+</div>
+</section>
+<!-- Section 4: The Inner Circle -->
+<section class="max-w-7xl mx-auto px-8 mb-40">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div>
+<span class="font-label text-[0.75rem] uppercase tracking-[0.2rem] text-primary mb-4 block">The Inner Circle</span>
+<h2 class="text-5xl font-headline text-primary">Founding Visionaries</h2>
+</div>
+<p class="md:max-w-md text-on-surface-variant leading-relaxed">The architects of the Planora framework, blending background in high fashion, luxury hospitality, and advanced technology.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Team member 1" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Portrait of a sophisticated male executive in a charcoal turtleneck, minimalist studio lighting, editorial style photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDooYIjxzGn9-8OvcCf5P5TM87eOpyEnS58F36KGrMPNM451kSHq0oOar5rNtLr-xoTQa6zQi2waIoFp-Xbz0--6xiyC8K9ODs3A5ZrKH6tSMObTZyUDWDbQCvUtM1o2m_zTDXOt9D-A7SUdJ-Gi7uis1roWOVcZ8VAFxlWEsomtflloC917S90hzjiBDObUnFt-wvrwXFcsVERkSBeQgZVVM-s_2P69sj6aJEjPZaz4TEPoCii4WgUa1H9jQalfIjV5c36gDIhAhk0"/>
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-white font-headline text-xl">Julian Vane</p>
+<p class="text-white/70 text-xs uppercase tracking-widest font-label mt-1">Creative Director</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Team member 2" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close up portrait of an elegant woman with a confident expression, soft natural side lighting, minimalist white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLY27Y2-keZIuXLQedW9a-3kFkvlrAKTk6n0Pyo8OMJsOliuNTtgGXVmqjkKNdrsQMiKylEJqAEuaWHhUWTB_0UF5ma_yOIHf6FWU3hn2sWbNbO_CxijGP2M_itdnFwCoTR-BG_Twhg-fOTIb-hOYkSrCDO6tjbww38xZOV2PRqggLPb20A2vN4p8JlOAt73LjG_0gJB6bsmM8uA0yqtJge5iF8Q8knXdTRfu_jfb5cQn0vomqH2KJjKi2fNGVFoxwxppbjAVYYmas"/>
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-white font-headline text-xl">Elena Rossi</p>
+<p class="text-white/70 text-xs uppercase tracking-widest font-label mt-1">Chief Curator</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Team member 3" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Middle-aged man in designer eyewear looking thoughtfully off-camera, warm indoor library lighting, editorial business portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ7gJvVfkVq69C6OQ_Qu7kKpe5Hfwa4yrDPx0eEmGgJVd8aVJV1XQD0Rf_G7fbtPsPnXLIIjyeCuZrNIi8VT9sGyCqbfDzJipwC4YYiCBdO_78oQDQfiN1hsb2-Kau2R3ZbFgHcrEYL_X6Ieg4K-TWQUqz_lyURk9RB05NLMjMd5Ci3vSmzMcS1O_GsDrb0ZyODwe5qMpWojaRjTXq4NJby-A951hnrh0xPEHzPom9V8tMAa3CECZ2fqRBsqyNLNZaZCnbvE3nK1XZ"/>
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-white font-headline text-xl">Marcus Thorne</p>
+<p class="text-white/70 text-xs uppercase tracking-widest font-label mt-1">Experience Architect</p>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-xl overflow-hidden bg-surface-container">
+<img alt="Team member 4" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Professional woman in a neutral blazer, professional and warm demeanor, blurred modern office interior in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCydqaANflUPwT0fmVYzrXBdqTKzqBxHhV9aXPZzQ4pYoBZJmmhl1UHpJyKkD8pb2zHV75WeILW-ZaiWzNccOIrHvL-nA_qhcYxbbcx-pkVndNPjRzQrP-rwWRS9Ovj4ulvAoHvIJnRu1P1rcQL74ixsVHMgrQKVL0e9vg56_cYRkBSFufGfYMr7XmROvghbA6gi2WNlcAaQ3dfzdHG0ljw_epyIcxC0C3i77v-xpuzn0eTPL8yFQ6xpFD5AuFYYkPWWhcwlWaqzRjL"/>
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-white font-headline text-xl">Sasha Kim</p>
+<p class="text-white/70 text-xs uppercase tracking-widest font-label mt-1">Head of Partnerships</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: CTA -->
+<section class="max-w-7xl mx-auto px-8">
+<div class="bg-primary text-on-primary rounded-xl py-24 px-8 md:px-20 relative overflow-hidden">
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-10 pointer-events-none">
+<img alt="Texture background" class="w-full h-full object-cover" data-alt="Abstract aerial view of silk fabrics flowing in deep emerald and black tones with a subtle grain texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8KkIeY8kQ54cjpWGl9cKRb2ETxg-Pi05LRUPo4C0HiQoVB-9dK1UgpD_ZGRTDZ6QkM2m2BkX28YC_kpatRP6Isoiso2scPSA7aOC1R5LTyGOZRt9fruUbxwDLs87B8YkMijYUPCBA0hm3cVdYIKzUn11MRcFdSHw8IBv1E4tgTpaKcXSWzoLqY1Nydw2Do9n8BHjOh6nGsCVjePTyK2sPU00i9of7vEgOg4aBQTPmgtLdyEl4reJMvyLADVUhSihG0rx0lhNI6008"/>
+</div>
+<div class="relative z-10 max-w-2xl">
+<h2 class="text-5xl font-headline mb-8 leading-tight">Join the Journey</h2>
+<p class="text-on-primary-container text-lg mb-12 max-w-lg leading-relaxed">Whether you are looking to define your career or seek a partnership that transcends the ordinary, we invite you into our circle.</p>
+<div class="flex flex-col sm:flex-row gap-6">
+<button class="bg-surface text-primary px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-surface-container-low transition-colors duration-300">
+                            Explore Careers
+                        </button>
+<button class="border border-outline-variant/30 text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-colors duration-300">
+                            Partner With Us
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-8 mt-20 bg-[#f3f4f1] dark:bg-emerald-900/20">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-7xl mx-auto">
+<div class="font-['Newsreader'] text-xl italic text-[#003627]">Planora</div>
+<div class="flex gap-10">
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1rem] text-[#191c1b]/60 dark:text-emerald-100/50 hover:underline decoration-emerald-800/30" href="#">Careers</a>
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1rem] text-[#191c1b]/60 dark:text-emerald-100/50 hover:underline decoration-emerald-800/30" href="#">Press</a>
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1rem] text-[#191c1b]/60 dark:text-emerald-100/50 hover:underline decoration-emerald-800/30" href="#">Privacy</a>
+<a class="font-['Inter'] text-xs uppercase tracking-[0.1rem] text-[#191c1b]/60 dark:text-emerald-100/50 hover:underline decoration-emerald-800/30" href="#">Contact</a>
+</div>
+<div class="font-['Inter'] text-xs uppercase tracking-[0.1rem] text-[#1a4d3c] dark:text-emerald-400">
+                © 2024 Planora Editorial. The Art of the Gathering.
+            </div>
+</div>
+</footer>
+</body></html>

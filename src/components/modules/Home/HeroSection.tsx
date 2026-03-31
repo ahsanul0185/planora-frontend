@@ -9,18 +9,18 @@ export function HeroSection() {
         </span>
         <div className="mb-4">
           <span className="text-xs font-bold text-[#404944]/60 uppercase tracking-widest">
-            October 24, 2024
+            October 24, 2025
           </span>
         </div>
         <h1 className="font-newsreader text-[4rem] lg:text-[5.5rem] leading-[0.95] tracking-tight text-primary mb-8 -ml-1">
           The Art of the <br /> Perfect Gathering.
         </h1>
         <p className="text-lg text-[#404944] max-w-xl leading-relaxed mb-10">
-          Beyond event management. Planora is your digital maître d’, curating sophisticated experiences for those who value time, taste, and seamless execution.
+          Orchestrating the world's most ambitious visions. Planora provides the digital infrastructure for visionary organizers to curate unforgettable experiences with effortless elegance
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link href="/events" className="bg-primary text-white px-10 py-4 rounded-full text-[0.75rem] font-bold tracking-[0.1rem] uppercase shadow-lg text-center hover:opacity-90 transition-opacity">
-            Join Event
+            Explore Events
           </Link>
           <button className="bg-[#e2e3e0] text-[#191c1b] px-10 py-4 rounded-full text-[0.75rem] font-bold tracking-[0.1rem] uppercase hover:bg-[#d5e7db] transition-colors">
             Learn More

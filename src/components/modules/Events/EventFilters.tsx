@@ -6,12 +6,24 @@ import { getEventCategories } from "@/services/eventCategory.services";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { 
+  Globe, 
+  Lock, 
+  Ticket, 
+  CreditCard, 
+  Sparkles, 
+  LayoutGrid, 
+  Layers, 
+  Zap 
+} from "lucide-react";
 
 const EVENT_FILTER_DEFINITIONS = [
   serverManagedFilter.single("status"),
   serverManagedFilter.single("visibility"),
   serverManagedFilter.single("categoryId"),
   serverManagedFilter.single("isFree"),
+  serverManagedFilter.single("isFeatured"),
 ];
 
 const EventFilters = () => {
@@ -37,100 +49,151 @@ const EventFilters = () => {
   const activeCategory = filterValues.categoryId || "all";
   const activeVisibility = filterValues.visibility || "all";
   const activeIsFree = filterValues.isFree || "all";
+  const activeIsFeatured = filterValues.isFeatured || "all";
 
   return (
     <div className="flex flex-col gap-10">
-      {/* Category Filters */}
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] mr-4 opacity-60">Categories</span>
+      {/* Curation Filters */}
+      <div className="flex flex-wrap items-center gap-4">
+        <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] mr-2 opacity-60">Curation</span>
         <button
-          onClick={() => handleFilterChange("categoryId", undefined)}
+          onClick={() => handleFilterChange("isFeatured", undefined)}
           className={cn(
-            "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-            activeCategory === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+            "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+            activeIsFeatured === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
           )}
         >
-          All Categories
+          <LayoutGrid className="h-3.5 w-3.5" />
+          All Events
         </button>
-        <div className="flex flex-wrap gap-3">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => handleFilterChange("categoryId", category.id)}
-              className={cn(
-                "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95 whitespace-nowrap",
-                activeCategory === category.id ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-              )}
-            >
-              {category.name}
-            </button>
-          ))}
+        <button
+          onClick={() => handleFilterChange("isFeatured", "true")}
+          className={cn(
+            "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 shadow-sm flex items-center gap-2",
+            activeIsFeatured === "true" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+          )}
+        >
+          <Sparkles className="h-3.5 w-3.5" />
+          Featured Only
+        </button>
+      </div>
+
+      <div className="h-px bg-[#004337]/5 w-full" />
+      
+      {/* Category Filters */}
+      <div className="flex flex-col gap-4">
+        <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] opacity-60">Categories</span>
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={() => handleFilterChange("categoryId", undefined)}
+            className={cn(
+              "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+              activeCategory === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+            )}
+          >
+            <Layers className="h-3.5 w-3.5" />
+            All
+          </button>
+          <div className="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => handleFilterChange("categoryId", category.id)}
+                className={cn(
+                  "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 whitespace-nowrap flex items-center gap-2",
+                  activeCategory === category.id ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+                )}
+              >
+                {category.icon && (
+                  <div className="relative w-4 h-4 overflow-hidden rounded-sm">
+                    <Image 
+                      src={category.icon} 
+                      alt={category.name} 
+                      fill 
+                      className="object-contain"
+                    />
+                  </div>
+                )}
+                {category.name}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-20">
+      <div className="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-20">
         {/* Visibility Filters */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] mr-4 opacity-60">Exclusivity</span>
-          <button
-            onClick={() => handleFilterChange("visibility", undefined)}
-            className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-              activeVisibility === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-            )}
-          >
-            Any Access
-          </button>
-          <button
-            onClick={() => handleFilterChange("visibility", "PUBLIC")}
-            className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-              activeVisibility === "PUBLIC" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-            )}
-          >
-            Public
-          </button>
-          <button
-            onClick={() => handleFilterChange("visibility", "PRIVATE")}
-            className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-              activeVisibility === "PRIVATE" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-            )}
-          >
-            Private
-          </button>
+        <div className="flex flex-col gap-4">
+          <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] opacity-60">Exclusivity</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => handleFilterChange("visibility", undefined)}
+              className={cn(
+                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+                activeVisibility === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+              )}
+            >
+              
+              Any
+            </button>
+            <button
+              onClick={() => handleFilterChange("visibility", "PUBLIC")}
+              className={cn(
+                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+                activeVisibility === "PUBLIC" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+              )}
+            >
+              <Globe className="h-3.5 w-3.5" />
+              Public
+            </button>
+            <button
+              onClick={() => handleFilterChange("visibility", "PRIVATE")}
+              className={cn(
+                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+                activeVisibility === "PRIVATE" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+              )}
+            >
+              <Lock className="h-3.5 w-3.5" />
+              Private
+            </button>
+          </div>
         </div>
 
         {/* Fee Filters */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] mr-4 opacity-60">Admission</span>
-          <button
-            onClick={() => handleFilterChange("isFree", undefined)}
-            className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-              activeIsFree === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-            )}
-          >
-            Any
-          </button>
-          <button
-            onClick={() => handleFilterChange("isFree", "true")}
-            className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-              activeIsFree === "true" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-            )}
-          >
-            Free
-          </button>
-          <button
-            onClick={() => handleFilterChange("isFree", "false")}
-            className={cn(
-              "px-6 py-2 rounded-full text-sm font-semibold transition-all active:scale-95",
-              activeIsFree === "false" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
-            )}
-          >
-            Paid
-          </button>
+        <div className="flex flex-col gap-4">
+          <span className="text-[0.65rem] font-bold uppercase tracking-[0.2rem] text-[#3f4945] opacity-60">Admission</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => handleFilterChange("isFree", undefined)}
+              className={cn(
+                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+                activeIsFree === "all" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+              )}
+            >
+              
+              Any
+            </button>
+            <button
+              onClick={() => handleFilterChange("isFree", "true")}
+              className={cn(
+                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+                activeIsFree === "true" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+              )}
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              Free
+            </button>
+            <button
+              onClick={() => handleFilterChange("isFree", "false")}
+              className={cn(
+                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all active:scale-95 flex items-center gap-2",
+                activeIsFree === "false" ? "bg-[#004337] text-white" : "bg-[#e0e3e0] text-[#3f4945] hover:bg-[#d9e5e2]"
+              )}
+            >
+              <CreditCard className="h-3.5 w-3.5" />
+              Paid
+            </button>
+          </div>
         </div>
       </div>
     </div>
