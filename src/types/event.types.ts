@@ -44,6 +44,7 @@ export interface IEvent {
   updatedAt: string;
   maxParticipants: number | null;
   currency?: string;
+  timezone: string;
 
   // Relations
   organizer?: UserInfo;

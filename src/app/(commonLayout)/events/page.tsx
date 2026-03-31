@@ -45,7 +45,7 @@ const EventsPage = async ({ searchParams }: EventsPageProps) => {
           <header className="mb-24">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
               <div className="max-w-3xl">
-                <h1 className="font-newsreader text-7xl md:text-9xl font-medium tracking-tight text-[#004337] leading-[0.8] mb-12">
+                <h1 className="font-newsreader text-5xl md:text-8xl font-medium tracking-tight text-[#004337] leading-[0.8] mb-12">
                   The Curated <br/>Archive.
                 </h1>
                 <p className="text-[#3f4945] text-lg md:text-xl max-w-2xl font-light leading-relaxed opacity-80">
