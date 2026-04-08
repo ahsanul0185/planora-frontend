@@ -13,6 +13,23 @@ Planora is a state-of-the-art frontend application designed to provide a seamles
 
 ---
 
+## Credentials for Testing
+
+### Admin
+
+- Email:admin@planora.com
+- Password:admin1234
+
+### Organizer
+
+- Email: anisuzzamanlec77@gmail.com
+- Password:password1234
+
+### User
+
+- Email: abirhasan12270@gmail.com
+- Password: password1234
+
 ## 🚀 Built With
 
 ### Core Tech

@@ -13,6 +13,7 @@ import { getUserInfo } from "@/services/auth.services";
 import { getMyBookmarks } from "@/services/bookmark.services";
 import BookmarkButton from "./BookmarkButton";
 import { UserInfo } from "@/types/user.types";
+import { IBookmark } from "@/types/bookmark.types";
 import { IEvent } from "@/types/event.types";
 
 interface EventsListProps {
@@ -45,7 +46,7 @@ const EventsList = ({ initialParams }: EventsListProps) => {
   });
 
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const [bookmarks, setBookmarks] = useState<IEvent[]>([]);
+  const [bookmarks, setBookmarks] = useState<IBookmark[]>([]);
 
   useEffect(() => {
     const fetchUserAndBookmarks = async () => {
@@ -91,7 +92,7 @@ const EventsList = ({ initialParams }: EventsListProps) => {
             <BookmarkButton 
               event={event} 
               userInfo={userInfo} 
-              initialBookmarked={bookmarks.some(b => b.id === event.id)} 
+              initialBookmarked={bookmarks.some(b => b.eventId === event.id)} 
             />
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1 bg-[#d1e7e2] text-[#374b47] text-[10px] font-bold rounded-md uppercase tracking-wider">

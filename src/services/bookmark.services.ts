@@ -3,8 +3,11 @@
 import { httpClient } from "@/lib/axios/httpClient";
 import { IEvent } from "@/types/event.types";
 
-export const getMyBookmarks = async (): Promise<IEvent[]> => {
-  const res = await httpClient.get<IEvent[]>("/bookmark/me");
+import { IBookmark } from "@/types/bookmark.types";
+
+export const getMyBookmarks = async (): Promise<IBookmark[]> => {
+  const res = await httpClient.get<IBookmark[]>("/bookmark/me");
+  console.log(res.data)
   return res.data;
 };
 

@@ -46,7 +46,7 @@ export default async function EventDetailsPage({ params }: EventPageProps) {
   if (userInfo) {
     try {
       const bookmarks = await getMyBookmarks();
-      isBookmarked = bookmarks.some((b: any) => b.id === event.id);
+      isBookmarked = bookmarks.some((b: any) => b.eventId === event.id);
     } catch (error) {
       console.error("Failed to fetch bookmarks:", error);
     }
