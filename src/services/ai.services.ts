@@ -30,3 +30,17 @@ export const generateEventDescription = async (payload: {
         throw new Error("Failed to generate event description");
     }
 };
+
+export const getAIRecommendations = async (): Promise<any[]> => {
+    try {
+        const res = await httpClient.get<any[]>("/ai/recommendations");
+        // res is the ApiResponse, so res.data is the actual array of events
+        console.log("AI Recommendations Received:", res.data?.length, "items");
+        return res.data || [];
+    } catch (error) {
+        console.error("Error in AI recommendations service:", error);
+        return [];
+    }
+};
+
+
