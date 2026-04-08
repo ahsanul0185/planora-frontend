@@ -3,6 +3,7 @@ import QueryProviders from "@/providers/QueryProvider";
 import type { Metadata } from "next";
 import { Inter, Newsreader, Urbanist } from "next/font/google";
 import "./globals.css";
+import { AIChatbot } from "@/components/shared/AIChatbot";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,8 +44,10 @@ export default function RootLayout({
         <QueryProviders>
           {children}
           <Toaster position="top-right" richColors />
+          <AIChatbot />
         </QueryProviders>
       </body>
     </html>
   );
 }
+
