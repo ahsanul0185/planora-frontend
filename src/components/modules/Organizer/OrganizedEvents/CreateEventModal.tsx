@@ -23,6 +23,9 @@ import { ImagePlus, X } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { eventValidationSchema } from "@/zod/event.validation";
+import { generateEventDescription } from "@/services/ai.services";
+import { Loader2, Sparkles } from "lucide-react";
+
 
 interface CreateEventModalProps {
   open: boolean;
@@ -73,6 +76,8 @@ const CreateEventModal = ({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [bannerFile, setBannerFile] = useState<File | null>(null);
   const [isOnline, setIsOnline] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -159,6 +164,41 @@ const CreateEventModal = ({
       }
     },
   });
+
+  const handleAIGenerate = async (field: any) => {
+
+    const title = form.getFieldValue("title");
+    const categoryId = form.getFieldValue("categoryId");
+    const tags = form.getFieldValue("tags");
+
+    if (!title) {
+      toast.error("Please enter an event title first!");
+      return;
+    }
+
+    if (field.state.value.trim() && !confirm("This will overwrite your current description. Continue?")) {
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const categoryName = categories.find((c) => c.id === categoryId)?.name;
+      const tagList = tags ? tags.split(",").map((t: string) => t.trim()) : [];
+
+      const result = await generateEventDescription({
+        title,
+        category: categoryName,
+        tags: tagList,
+      });
+
+      field.handleChange(result);
+      toast.success("Description generated!");
+    } catch (err) {
+      toast.error("Failed to generate description");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <Dialog
@@ -257,19 +297,42 @@ const CreateEventModal = ({
                 name="description"
                 children={(field) => (
                   <div className="space-y-1.5">
-                    <Label htmlFor={field.name}>Description</Label>
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor={field.name}>Description</Label>
+                      <form.Subscribe
+                        selector={(state) => [state.values.title]}
+                        children={([title]) => (
+                          <button
+                            type="button"
+                            disabled={isGenerating || !title}
+                            onClick={() => handleAIGenerate(field)}
+                            className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold bg-primary text-primary-foreground px-2.5 py-1 rounded-md hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed group shadow-sm"
+                          >
+                            {isGenerating ? (
+                              <Loader2 className="h-3 w-3 animate-spin" />
+                            ) : (
+                              <Sparkles className="h-3 w-3 group-hover:animate-pulse" />
+                            )}
+                            {isGenerating ? "Generating..." : "Generate with AI"}
+                          </button>
+                        )}
+                      />
+                    </div>
+
+
                     <textarea
                       id={field.name}
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
                       onBlur={field.handleBlur}
-                      rows={3}
+                      rows={4}
                       placeholder="Describe your event..."
                       className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none"
                     />
                   </div>
                 )}
               />
+
 
               <div className="grid grid-cols-2 gap-4">
                 <form.Field
@@ -290,9 +353,10 @@ const CreateEventModal = ({
                       error={
                         field.state.meta.isTouched &&
                         field.state.meta.errors.length > 0
-                          ? String(field.state.meta.errors[0])
+                          ? (field.state.meta.errors[0] as any)?.message || String(field.state.meta.errors[0])
                           : undefined
                       }
+
                     />
                   )}
                 />
@@ -372,9 +436,10 @@ const CreateEventModal = ({
                       error={
                         field.state.meta.isTouched &&
                         field.state.meta.errors.length > 0
-                          ? String(field.state.meta.errors[0])
+                          ? (field.state.meta.errors[0] as any)?.message || String(field.state.meta.errors[0])
                           : undefined
                       }
+
                     />
                   )}
                 />
@@ -391,9 +456,10 @@ const CreateEventModal = ({
                       error={
                         field.state.meta.isTouched &&
                         field.state.meta.errors.length > 0
-                          ? String(field.state.meta.errors[0])
+                          ? (field.state.meta.errors[0] as any)?.message || String(field.state.meta.errors[0])
                           : undefined
                       }
+
                     />
                   )}
                 />

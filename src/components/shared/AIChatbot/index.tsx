@@ -25,6 +25,9 @@ export const AIChatbot = () => {
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -33,6 +36,30 @@ export const AIChatbot = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isLoading]);
+
+    // Focus input when chat opens or loading ends
+    useEffect(() => {
+        if (isOpen && !isLoading) {
+            inputRef.current?.focus();
+        }
+    }, [isOpen, isLoading]);
+
+    // Click outside to close
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (chatContainerRef.current && !chatContainerRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
+
 
     const handleSend = async (text: string) => {
         if (!text.trim() || isLoading) return;
@@ -46,6 +73,7 @@ export const AIChatbot = () => {
             const response = await chatWithAI(newMessages);
             setMessages(prev => [...prev, { role: "assistant", content: response }]);
         } catch (error) {
+            console.log(error);
             setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I encountered an error. Please try again later." }]);
         } finally {
             setIsLoading(false);
@@ -53,7 +81,8 @@ export const AIChatbot = () => {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div ref={chatContainerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -162,12 +191,14 @@ export const AIChatbot = () => {
                                 }}
                             >
                                 <Input
+                                    ref={inputRef}
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     placeholder="Type your question here..."
                                     className="pr-12 h-11 bg-muted/30 border-border focus-visible:ring-primary/20"
                                     disabled={isLoading}
                                 />
+
                                 <div className="absolute right-1.5">
                                     <Button 
                                         size="icon" 
@@ -192,7 +223,6 @@ export const AIChatbot = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl flex items-center justify-center hover:bg-primary/95 transition-all duration-300 relative group"
             >
-                <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20 group-hover:opacity-40 transition-opacity" />
                 {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6 fill-current" />}
             </motion.button>
         </div>
